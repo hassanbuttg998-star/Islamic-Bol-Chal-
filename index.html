@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Islamic Bol Chal | Premium Educational Platform</title>
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2 family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- FontAwesome Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -37,23 +39,24 @@
             color: var(--text-white);
             font-family: var(--font-sans);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
             width: 90%;
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* --- PREMIUM NAVBAR --- */
+        /* --- PREMIUM RESPONSIVE NAVBAR --- */
         header {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(5, 6, 8, 0.75);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            background: rgba(5, 6, 8, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -61,165 +64,148 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 15px 0;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
             text-decoration: none;
         }
 
-        .logo img {
-            height: 45px;
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            color: var(--text-white);
+        }
+
+        .logo-text span {
+            color: var(--primary-gold);
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 24px;
             list-style: none;
         }
 
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 400;
+            font-size: 0.9rem;
             transition: color 0.3s;
         }
 
         .nav-links a:hover, .nav-links a.active {
             color: var(--primary-gold);
-            text-shadow: 0 0 10px var(--gold-glow);
         }
 
         .lang-selector-btn {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(212, 175, 55, 0.3);
             color: var(--text-white);
-            padding: 8px 16px;
+            padding: 6px 12px;
             border-radius: 6px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            transition: all 0.3s;
+            font-size: 0.8rem;
         }
 
-        .lang-selector-btn:hover {
-            border-color: var(--primary-gold);
-            background: rgba(212, 175, 55, 0.05);
-        }
-
-        /* --- CINEMATIC HERO SECTION --- */
+        /* --- CLEAN CINEMATIC HERO SECTION (No Store Background) --- */
         .hero {
             position: relative;
-            min-height: 95vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            background: radial-gradient(circle at 80% 40%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
-                        linear-gradient(to bottom, transparent 70%, var(--bg-darker) 100%),
-                        url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1974') no-repeat center center;
-            background-size: cover;
+            /* Pure Dark Geometric Cinematic Gradient */
+            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 70%), var(--bg-darker);
             padding-top: 100px;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 6, 8, 0.65);
-            z-index: 1;
+            padding-bottom: 40px;
         }
 
         .hero-content-wrapper {
-            position: relative;
-            z-index: 2;
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 1.1fr 0.9fr;
             gap: 40px;
             align-items: center;
+            width: 100%;
         }
 
         .hero-left .welcome-tag {
             color: var(--primary-gold);
-            font-size: 1rem;
+            font-size: 0.85rem;
             letter-spacing: 3px;
             font-weight: 600;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            display: block;
         }
 
         .hero-left h1 {
             font-family: var(--font-heading);
-            font-size: 4.2rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 20px;
+            line-height: 1.2;
+            margin-bottom: 15px;
         }
 
         .hero-left h1 span {
             color: var(--primary-gold);
-            position: relative;
         }
 
         .hero-left .hero-desc {
             color: var(--text-muted);
-            font-size: 1.3rem;
-            max-width: 600px;
-            margin-bottom: 30px;
+            font-size: 1.15rem;
+            margin-bottom: 25px;
             line-height: 1.6;
         }
 
         .hero-left .vision-pillars {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             color: var(--primary-gold);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
             font-weight: 500;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
         }
 
         .hero-left .vision-pillars span::after {
             content: '  •';
-            margin-left: 20px;
-            color: rgba(255,255,255,0.2);
+            margin-left: 15px;
+            color: rgba(255,255,255,0.15);
         }
-
         .hero-left .vision-pillars span:last-child::after { content: ''; }
 
         .hero-btn-group {
             display: flex;
-            gap: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .btn {
-            padding: 14px 32px;
+            padding: 12px 28px;
             font-family: var(--font-sans);
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             border-radius: 6px;
             cursor: pointer;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            transition: all 0.4s ease;
+            gap: 8px;
+            transition: all 0.3s ease;
         }
 
         .btn-filled {
             background: var(--primary-gold);
             color: #000;
             border: none;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
         }
 
         .btn-filled:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
 
         .btn-outlined {
@@ -231,136 +217,101 @@
         .btn-outlined:hover {
             border-color: var(--primary-gold);
             color: var(--primary-gold);
-            background: rgba(212, 175, 55, 0.02);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
-        /* Hero Right Floating Language Card */
+        /* Language Card */
         .hero-right-card {
-            background: rgba(14, 17, 24, 0.65);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(20px);
             border-radius: 12px;
-            padding: 35px;
+            padding: 30px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
         .hero-right-card i.fa-earth-americas {
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: var(--primary-gold);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
-        .hero-right-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 5px;
-        }
-
-        .hero-right-card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-        }
+        .hero-right-card h3 { font-size: 1.2rem; margin-bottom: 4px; }
+        .hero-right-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; }
 
         .lang-option {
-            background: rgba(255,255,255,0.02);
+            background: rgba(255,255,255,0.01);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 14px;
+            padding: 12px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 12px;
+            margin-bottom: 12px;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .lang-option:hover, .lang-option.active {
             border-color: var(--primary-gold);
-            background: rgba(212, 175, 55, 0.05);
+            background: rgba(212, 175, 55, 0.04);
         }
 
-        .lang-option img {
-            width: 24px;
-            height: 16px;
-            object-fit: cover;
-            border-radius: 2px;
-        }
+        .lang-option img { width: 22px; height: 14px; object-fit: cover; border-radius: 2px; }
+        .lang-option span { font-size: 0.95rem; font-weight: 500; }
+        .card-note { font-size: 0.7rem; color: var(--text-muted); display: block; margin-top: 12px; }
 
-        .lang-option span {
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .card-note {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            display: block;
-            margin-top: 15px;
-        }
-
-        /* --- LATEST VIDEOS ROW --- */
+        /* --- VIDEOS ROWS --- */
         .section-padding {
-            padding: 80px 0;
-            background-color: var(--bg-darker);
+            padding: 60px 0;
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
+            gap: 15px;
         }
 
         .section-title {
             font-family: var(--font-heading);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .section-title i {
-            color: var(--primary-gold);
-        }
+        .section-title i { color: var(--primary-gold); }
 
         .view-all-btn {
             color: var(--primary-gold);
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.85rem;
+            white-space: nowrap;
             border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 8px 16px;
+            padding: 6px 12px;
             border-radius: 4px;
-            transition: all 0.3s;
-        }
-
-        .view-all-btn:hover {
-            background: var(--primary-gold);
-            color: #000;
         }
 
         .videos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
 
         .video-card {
             background: var(--bg-card);
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            cursor: pointer;
+            transition: all 0.3s;
         }
 
         .video-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(212, 175, 55, 0.3);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transform: translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.2);
         }
 
         .thumb-wrap {
@@ -369,347 +320,154 @@
             background: #000;
         }
 
-        .thumb-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.85;
-            transition: opacity 0.3s;
-        }
-
-        .video-card:hover .thumb-wrap img {
-            opacity: 1;
-        }
-
+        .thumb-wrap img { width: 100%; height: 100%; object-fit: cover; }
         .video-duration {
-            position: absolute;
-            bottom: 10px; right: 10px;
-            background: rgba(0,0,0,0.8);
-            padding: 2px 6px;
-            font-size: 0.75rem;
-            border-radius: 3px;
-            font-weight: 500;
+            position: absolute; bottom: 8px; right: 8px;
+            background: rgba(0,0,0,0.85); padding: 2px 6px;
+            font-size: 0.7rem; border-radius: 3px;
         }
 
-        .video-info {
-            padding: 20px;
-        }
+        .video-info { padding: 15px; }
+        .video-info h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; line-height: 1.4; }
+        .video-meta-channel { font-size: 0.78rem; color: var(--primary-gold); margin-bottom: 2px; }
+        .video-stats { font-size: 0.75rem; color: var(--text-muted); }
 
-        .video-info h4 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            line-height: 1.4;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .video-meta-channel {
-            font-size: 0.8rem;
-            color: var(--primary-gold);
-            margin-bottom: 4px;
-        }
-
-        .video-stats {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* --- FEATURED DUAL COLUMN MODULE --- */
+        /* --- SPLIT MODULE --- */
         .split-module-grid {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
-            gap: 30px;
-            margin-top: 20px;
+            gap: 25px;
+            margin-top: 40px;
         }
 
-        .featured-doc-panel {
+        .featured-doc-panel, .question-panel {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 30px;
+            padding: 25px;
         }
 
         .doc-box {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-top: 20px;
-            align-items: center;
+            gap: 20px;
+            margin-top: 15px;
         }
 
         .doc-video-mock {
-            position: relative;
-            aspect-ratio: 16/9;
-            background: #151922;
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .doc-video-mock img {
-            position: absolute;
-            width:100%; height:100%; object-fit:cover; opacity: 0.5;
-        }
-
-        .play-ring {
-            position: relative; z-index: 2;
-            width: 50px; height: 50px;
-            background: var(--primary-gold);
-            border-radius: 50%;
+            position: relative; aspect-ratio: 16/9; background: #000; border-radius: 6px; overflow: hidden;
             display: flex; align-items: center; justify-content: center;
-            color: #000; font-size: 1.2rem;
-            box-shadow: 0 0 20px var(--gold-glow);
+        }
+        .doc-video-mock img { position: absolute; width:100%; height:100%; object-fit:cover; opacity: 0.6; }
+        
+        .play-ring {
+            position: relative; z-index: 2; width: 40px; height: 40px;
+            background: var(--primary-gold); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: #000;
         }
 
-        .doc-details h4 {
-            font-size: 1.3rem; margin-bottom: 4px; color: var(--primary-gold);
-        }
+        .doc-details h4 { font-size: 1.1rem; margin-bottom: 2px; }
+        .doc-details span { font-size: 0.8rem; color: var(--primary-gold); display: block; margin-bottom: 8px; }
+        .doc-details p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 15px; }
 
-        .doc-details span {
-            font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 12px;
-        }
-
-        .doc-details p {
-            font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px;
-        }
-
-        /* Today's Question Panel (Glowing Box) */
         .question-panel {
-            background: linear-gradient(135deg, #0e1118 0%, #080a0f 100%);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 12px;
-            padding: 30px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            display: flex; flex-direction: column; justify-content: space-between;
+            border-color: rgba(212, 175, 55, 0.15);
         }
-
-        .question-box-body {
-            text-align: center;
-            padding: 20px 0;
-        }
-
         .urdu-question {
-            font-family: 'Urdu Typesetting', 'Jonamee', 'Noto Nastaliq Urdu', serif;
-            font-size: 1.9rem;
-            line-height: 2.2;
-            direction: rtl;
-            color: var(--text-white);
-            text-shadow: 0 0 15px rgba(255,255,255,0.1);
+            font-size: 1.5rem; line-height: 2; text-align: center; padding: 15px 0; color: #fff;
         }
 
-        .question-mark-bg {
-            position: absolute;
-            right: 30px; bottom: 20px;
-            font-size: 8rem;
-            color: rgba(212, 175, 55, 0.04);
-            font-weight: 700;
-            pointer-events: none;
-        }
-
-        /* --- CATEGORIES MATRIX --- */
+        /* --- TOPICS MATRIX --- */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 20px;
+            gap: 15px;
         }
 
         .category-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 30px 20px;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 8px; padding: 20px 15px; text-align: center;
         }
 
-        .category-card:hover {
-            border-color: var(--primary-gold);
-            background: rgba(212, 175, 55, 0.02);
-            transform: translateY(-4px);
-        }
+        .category-card i { font-size: 1.8rem; color: var(--primary-gold); margin-bottom: 10px; display: block; }
+        .category-card h4 { font-size: 0.9rem; margin-bottom: 4px; }
+        .category-card p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.3; }
+        .badge-coming { background: rgba(212, 175, 55, 0.1); color: var(--primary-gold); font-size: 0.6rem; padding: 2px 6px; border-radius: 10px; margin-top: 4px; display: inline-block;}
 
-        .category-card i {
-            font-size: 2rem;
-            color: var(--primary-gold);
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .category-card h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .category-card p {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        .badge-coming {
-            background: rgba(212, 175, 55, 0.1);
-            color: var(--primary-gold);
-            font-size: 0.65rem;
-            padding: 2px 8px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 5px;
-        }
-
-        /* --- ABOUT DEEP REEF FOOTER --- */
+        /* --- FOOTER BANNER --- */
         .about-banner {
-            background: linear-gradient(to right, #0e1118, rgba(14, 17, 24, 0.3)),
-                        url('https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=2071') no-repeat center center;
-            background-size: cover;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 40px;
-            margin-bottom: 8px;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 35px; text-align: center;
         }
+        .about-banner h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .about-banner p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; }
 
-        .about-text-content { max-width: 600px; }
-        .about-text-content h3 { font-size: 1.8rem; margin-bottom: 15px; font-family: var(--font-heading); }
-        .about-text-content p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 25px; }
-
-        .about-visual-assets {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .about-visual-assets i.fa-book-quran {
-            font-size: 6rem;
-            color: rgba(212, 175, 55, 0.15);
-        }
-
-        /* --- ACTUAL FOOTER COMPONENT --- */
         footer {
-            background-color: #030406;
-            border-top: 1px solid var(--border-color);
-            padding: 60px 0 30px 0;
-            font-size: 0.9rem;
+            background: #030406; border-top: 1px solid var(--border-color); padding: 40px 0 20px 0; font-size: 0.85rem;
         }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-brand p { color: var(--text-muted); margin-top: 15px; font-size: 0.85rem; }
-        .footer-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 20px; color: var(--text-white); text-transform: uppercase; letter-spacing: 1px; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+        .footer-brand p { color: var(--text-muted); margin-top: 10px; }
+        .footer-title { font-size: 0.95rem; margin-bottom: 15px; color: #fff; text-transform: uppercase;}
         .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+        .footer-links li { margin-bottom: 8px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
         .footer-links a:hover { color: var(--primary-gold); }
+        .bottom-bar { display: flex; justify-content: space-between; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 20px; font-size: 0.75rem; }
 
-        .social-row { display: flex; gap: 15px; margin-top: 15px; }
-        .social-circle {
-            width: 38px; height: 38px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-muted);
-            text-decoration: none; transition: all 0.3s;
-        }
-        .social-circle:hover { border-color: var(--primary-gold); color: var(--primary-gold); transform: translateY(-2px); }
-
-        .newsletter-box { display: flex; gap: 10px; margin-top: 15px; }
-        .newsletter-box input {
-            background: #090b0f; border: 1px solid var(--border-color); padding: 12px; border-radius: 4px; color: #fff; width: 100%;
-        }
-        .newsletter-box input:focus { outline: none; border-color: var(--primary-gold); }
-
-        .bottom-bar {
-            border-top: 1px solid var(--border-color);
-            padding-top: 30px;
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
-
-        /* SECRET SIGN-IN BACKDOOR (Strictly Hidden from Normal Public Sight) */
-        .hidden-admin-trigger {
-            color: var(--text-muted);
-            cursor: default;
-            user-select: none;
-            transition: color 0.2s;
-        }
-        .hidden-admin-trigger:hover {
-            color: var(--primary-gold);
-        }
-
-        /* Clean Admin Portal Overlay Modal Style */
-        .portal-modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(3, 4, 6, 0.95); backdrop-filter: blur(15px);
-            z-index: 2000; display: none; align-items: center; justify-content: center;
-        }
-
-        .portal-form-card {
-            background: var(--bg-card); border: 1px solid var(--primary-gold);
-            border-radius: 12px; padding: 40px; width: 100%; max-width: 450px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-        }
-
-        .portal-form-card h2 { font-size: 1.5rem; margin-bottom: 20px; color: var(--primary-gold); text-align: center; }
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; }
-        .input-group input, .input-group select, .input-group textarea {
-            width:100%; background:#050608; border: 1px solid var(--border-color); padding:12px; color:#fff; border-radius:6px;
-        }
-        .input-group input:focus { outline:none; border-color:var(--primary-gold); }
-
-        /* Responsive */
-        @media(max-width: 992px) {
-            .hero-content-wrapper { grid-template-columns: 1fr; }
-            .hero-right-card { max-width: 450px; margin: 0 auto; }
+        /* ==========================================================================
+           COMPREHENSIVE MOBILE RESPONSIVE FIXES (Overrides Everything For Mobile)
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .hero-content-wrapper { grid-template-columns: 1fr; gap: 30px; }
+            .hero-left { text-align: center; }
+            .hero-left h1 { font-size: 2.5rem; }
+            .hero-left .vision-pillars { justify-content: center; }
+            .hero-btn-group { justify-content: center; }
+            .videos-grid { grid-template-columns: repeat(2, 1fr); }
             .split-module-grid { grid-template-columns: 1fr; }
             .categories-grid { grid-template-columns: repeat(3, 1fr); }
-            .about-banner { flex-direction: column; text-align: center; padding: 30px; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
         }
-        @media(max-width: 600px) {
-            .categories-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: 1fr; }
+
+        @media (max-width: 600px) {
+            /* Navbar Compression Safe Fix */
+            .nav-links { display: none; } /* Mobile Menu Safe hidden for clean row layout */
+            .nav-container { padding: 12px 0; }
+            
+            .hero-left h1 { font-size: 2.1rem; }
+            .hero-left .hero-desc { font-size: 1rem; }
+            
+            .videos-grid { grid-template-columns: 1fr; } /* Stack Single Column For Perfect Mobile Grid Cards */
             .doc-box { grid-template-columns: 1fr; }
+            .categories-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            .section-title { font-size: 1.3rem; }
+            .bottom-bar { flex-direction: column; gap: 10px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Header Navbar Frame -->
     <header>
         <div class="container nav-container">
             <a href="#" class="logo">
-                <h2 style="font-family: var(--font-heading); color:#fff; font-size:1.5rem; font-weight:700; letter-spacing:1px;">IBC</h2>
+                <h2 class="logo-text">IBC<span>.</span></h2>
             </a>
             <ul class="nav-links">
                 <li><a href="#" class="active">Home</a></li>
                 <li><a href="#latest-videos-sec">Videos</a></li>
                 <li><a href="#categories-sec">Quiz</a></li>
                 <li><a href="#categories-sec">Prophets</a></li>
-                <li><a href="#categories-sec">Duas</a></li>
             </ul>
             <button class="lang-selector-btn">
-                <i class="fa-solid fa-globe"></i>
-                <span>EN <i class="fa-solid fa-chevron-down" style="font-size:0.7rem; margin-left:3px;"></i></span>
+                <i class="fa-solid fa-globe"></i> EN
             </button>
         </div>
     </header>
 
+    <!-- Dark Luxury Space Hero Frame -->
     <section class="hero">
         <div class="container hero-content-wrapper">
             <div class="hero-left">
@@ -724,7 +482,7 @@
                 </div>
                 <div class="hero-btn-group">
                     <a href="#latest-videos-sec" class="btn btn-filled"><i class="fa-solid fa-circle-play"></i> Watch Videos</a>
-                    <a href="#categories-sec" class="btn btn-outlined"><i class="fa-solid fa-book-open"></i> Explore Knowledge</a>
+                    <a href="#categories-sec" class="btn btn-outlined"><i class="fa-solid fa-book-open"></i> Explore</a>
                 </div>
             </div>
             
@@ -741,81 +499,24 @@
                     <img src="https://flagcdn.com/w40/us.png" alt="English">
                     <span>English</span>
                 </div>
-                <span class="card-note"><i class="fa-solid fa-lock" style="font-size:0.7rem;"></i> Your choice will be saved</span>
+                <span class="card-note"><i class="fa-solid fa-lock" style="font-size:0.65rem;"></i> Choices are secure</span>
             </div>
         </div>
     </section>
 
+    <!-- Main Content Grid Rows Frame -->
     <main>
 
+        <!-- MODULE 1: Latest Videos Track Row -->
         <section id="latest-videos-sec" class="section-padding">
             <div class="container">
                 <div class="section-header">
                     <h3 class="section-title"><i class="fa-solid fa-film"></i> Latest Videos</h3>
-                    <a href="#" class="view-all-btn">View All Videos <i class="fa-solid fa-arrow-right" style="font-size:0.8rem; margin-left:5px;"></i></a>
+                    <a href="#" class="view-all-btn">View All</a>
                 </div>
                 
                 <div class="videos-grid">
-                    <div class="video-card">
-                        <div class="thumb-wrap">
-                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964" alt="Qayamat">
-                            <span class="video-duration">18:24</span>
-                        </div>
-                        <div class="video-info">
-                            <h4>Qayamat Ki Nishaniyan</h4>
-                            <p class="video-meta-channel">Islamic Bol Chal</p>
-                            <p class="video-stats">125K views • 3 days ago</p>
-                        </div>
-                    </div>
-                    <div class="video-card">
-                        <div class="thumb-wrap">
-                            <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?q=80&w=2070" alt="Ark">
-                            <span class="video-duration">21:35</span>
-                        </div>
-                        <div class="video-info">
-                            <h4>Nuh (A.S) Ka Waqia</h4>
-                            <p class="video-meta-channel">Islamic Bol Chal</p>
-                            <p class="video-stats">98K views • 6 days ago</p>
-                        </div>
-                    </div>
-                    <div class="video-card">
-                        <div class="thumb-wrap">
-                            <img src="https://images.unsplash.com/photo-1590075865003-e48277adc558?q=80&w=1974" alt="Makkah">
-                            <span class="video-duration">16:48</span>
-                        </div>
-                        <div class="video-info">
-                            <h4>Hazrat Ibrahim (A.S) Ki Zindagi</h4>
-                            <p class="video-meta-channel">Islamic Bol Chal</p>
-                            <p class="video-stats">76K views • 1 week ago</p>
-                        </div>
-                    </div>
-                    <div class="video-card">
-                        <div class="thumb-wrap">
-                            <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=2070" alt="Safar">
-                            <span class="video-duration">19:12</span>
-                        </div>
-                        <div class="video-info">
-                            <h4>Hazrat Musa (A.S) Ka Safar</h4>
-                            <p class="video-meta-channel">Islamic Bol Chal</p>
-                            <p class="video-stats">88K views • 1 week ago</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="split-module-grid">
-                    
-                    <div class="featured-doc-panel">
-                        <h3 class="section-title" style="font-size:1.4rem; margin-bottom:10px;"><i class="fa-solid fa-clapperboard"></i> Featured Documentary</h3>
-<!-- MODULE 1: Latest Videos Track Display Row -->
-        <section id="latest-videos-sec" class="section-padding">
-            <div class="container">
-                <div class="section-header">
-                    <h3 class="section-title"><i class="fa-solid fa-film"></i> Latest Videos</h3>
-                    <a href="#" class="view-all-btn">View All Videos <i class="fa-solid fa-arrow-right" style="font-size:0.8rem; margin-left:5px;"></i></a>
-                </div>
-                
-                <div class="videos-grid">
-                    <!-- Card 1: Qayamat -->
+                    <!-- Card 1 -->
                     <div class="video-card">
                         <div class="thumb-wrap">
                             <img src="Image/Qayamt.png" alt="Qayamat Ki Nishaniyan">
@@ -827,10 +528,10 @@
                             <p class="video-stats">125K views • 3 days ago</p>
                         </div>
                     </div>
-                    <!-- Card 2: Hazrat Adam (A.S) -->
+                    <!-- Card 2 -->
                     <div class="video-card">
                         <div class="thumb-wrap">
-                            <img src="Image/Adam.png" alt="Hazrat Adam (A.S) Ka Waqia">
+                            <img src="Image/Adam.png" alt="Hazrat Adam (A.S)">
                             <span class="video-duration">21:35</span>
                         </div>
                         <div class="video-info">
@@ -839,7 +540,7 @@
                             <p class="video-stats">98K views • 6 days ago</p>
                         </div>
                     </div>
-                    <!-- Card 3: Qabar Ka Azab / Waqia -->
+                    <!-- Card 3 -->
                     <div class="video-card">
                         <div class="thumb-wrap">
                             <img src="Image/Qabar.png" alt="Qabar Ka Waqia">
@@ -851,10 +552,10 @@
                             <p class="video-stats">76K views • 1 week ago</p>
                         </div>
                     </div>
-                    <!-- Card 4: Hazrat Shis (A.S) -->
+                    <!-- Card 4 -->
                     <div class="video-card">
                         <div class="thumb-wrap">
-                            <img src="Image/Shis.png" alt="Hazrat Shis (A.S) Ka Safar">
+                            <img src="Image/Shis.png" alt="Hazrat Shis (A.S)">
                             <span class="video-duration">19:12</span>
                         </div>
                         <div class="video-info">
@@ -867,170 +568,113 @@
 
                 <!-- MODULE 2: Dual Segment Block -->
                 <div class="split-module-grid">
-                    
-                    <!-- Left: Featured Panel Doc Info -->
                     <div class="featured-doc-panel">
-                        <h3 class="section-title" style="font-size:1.4rem; margin-bottom:10px;"><i class="fa-solid fa-clapperboard"></i> Featured Documentary</h3>
+                        <h3 class="section-title" style="font-size:1.2rem; margin-bottom:10px;"><i class="fa-solid fa-clapperboard"></i> Featured Documentary</h3>
                         <div class="doc-box">
                             <div class="doc-video-mock">
-                                <!-- Featured mein humne Adam (A.S) ki image set ki hai -->
                                 <img src="Image/Adam.png" alt="Hazrat Adam (A.S)">
-                                <div class="play-ring"><i class="fa-solid fa-play" style="margin-left:3px;"></i></div>
+                                <div class="play-ring"><i class="fa-solid fa-play" style="font-size:0.9rem; margin-left:2px;"></i></div>
                             </div>
                             <div class="doc-details">
                                 <h4>Hazrat Adam (A.S)</h4>
                                 <span>Documentary</span>
-                                <p>Complete cinematic story of Prophet Adam (A.S) – Lessons, Faith and Divine Guidance.</p>
-                                <button class="btn btn-filled" style="padding:10px 20px; font-size:0.9rem;"><i class="fa-solid fa-play"></i> Watch Now</button>
+                                <p>Complete story of Prophet Adam (A.S).</p>
+                                <button class="btn btn-filled" style="padding:8px 16px; font-size:0.8rem;"><i class="fa-solid fa-play"></i> Watch</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right: Today's Interactive Islamic Trivia Quiz Box -->
                     <div class="question-panel">
-                        <h3 class="section-title" style="font-size:1.4rem;"><i class="fa-solid fa-circle-question"></i> Today's Islamic Question</h3>
-                        <div class="question-box-body">
-                            <p class="urdu-question">قیامت سے پہلے کونسا نشان سب سے پہلے ظاہر ہوگا؟</p>
-                        </div>
-                        <button class="btn btn-filled" style="width:100%; justify-content:center; background:#141923; color:var(--primary-gold); border:1px solid rgba(212,175,55,0.3); box-shadow:none;">
-                            Discover Answer <i class="fa-solid fa-arrow-right"></i>
+                        <h3 class="section-title" style="font-size:1.2rem;"><i class="fa-solid fa-circle-question"></i> Islamic Quiz</h3>
+                        <p class="urdu-question">قیامت سے پہلے کونسا نشان سب سے پہلے ظاہر ہوگا؟</p>
+                        <button class="btn btn-filled" style="width:100%; justify-content:center; background:#141923; color:var(--primary-gold); border:1px solid rgba(212,175,55,0.2); font-size:0.85rem;">
+                            Discover Answer
                         </button>
-                        <div class="question-mark-bg">?</div>
                     </div>
-
                 </div>
+
             </div>
         </section>
 
-        <section id="categories-sec" class="section-padding" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+        <!-- MODULE 3: Topics Grid -->
+        <section id="categories-sec" class="section-padding" style="border-top: 1px solid var(--border-color);">
             <div class="container">
                 <div class="section-header">
-                    <h3 class="section-title"><i class="fa-solid fa-grip"></i> Explore Our Topics</h3>
+                    <h3 class="section-title"><i class="fa-solid fa-grip"></i> Our Topics</h3>
                 </div>
-                
                 <div class="categories-grid">
                     <div class="category-card">
                         <i class="fa-solid fa-mosque"></i>
-                        <h4>Prophets Stories</h4>
-                        <p>Qissay, Seerat aur Sabak Amoz Waqiat</p>
+                        <h4>Prophets</h4>
+                        <p>Seerat Waqiat</p>
                     </div>
                     <div class="category-card">
                         <i class="fa-solid fa-hands-holding-child"></i>
-                        <h4>Duas Library</h4>
-                        <p>Rozana ki Duain Aur Azkar</p>
+                        <h4>Duas</h4>
+                        <p>Azkar Library</p>
                     </div>
                     <div class="category-card">
                         <i class="fa-solid fa-brain"></i>
-                        <h4>Islamic Quiz</h4>
-                        <p>Apne Deeni Ilm Ko Barhayein</p>
+                        <h4>Quiz</h4>
+                        <p>Deeni Ilm</p>
                     </div>
                     <div class="category-card">
                         <i class="fa-solid fa-feather-pointed"></i>
                         <h4>Articles</h4>
-                        <p>Deeni Maloomat Aur Tahqeeqi Articles</p>
+                        <p>Tahqeeq</p>
                     </div>
-                    <div class="category-card" style="opacity: 0.7;">
+                    <div class="category-card" style="opacity: 0.6;">
                         <i class="fa-solid fa-comments"></i>
                         <h4>Ask Islam</h4>
-                        <p>Deeni Masail Ka Hal</p>
-                        <span class="badge-coming">Coming Soon</span>
+                        <span class="badge-coming">Soon</span>
                     </div>
                     <div class="category-card">
                         <i class="fa-solid fa-video"></i>
-                        <h4>Videos</h4>
-                        <p>Islamic Documentaries Aur Short Clips</p>
+                        <h4>Clips</h4>
+                        <p>Shorts</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- MODULE 4: About Banner -->
         <section class="section-padding">
             <div class="container">
                 <div class="about-banner">
-                    <div class="about-text-content">
-                        <h3>About Islamic Bol Chal</h3>
-                        <p>Islamic Bol Chal is an effort to spread authentic Islamic knowledge, inspire hearts through the stories of Prophets and Salaf, and help everyone to strengthen their connection with Allah. Our mission is simple – Ilm, Iman, Amal, Ikhlaq.</p>
-                        <a href="#" class="btn btn-outlined" style="padding:10px 24px; font-size:0.9rem;">Read More About Us <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                    <div class="about-visual-assets">
-                        <i class="fa-solid fa-book-quran"></i>
-                    </div>
+                    <h3>About Islamic Bol Chal</h3>
+                    <p>Islamic Bol Chal is an effort to spread authentic Islamic knowledge, inspire hearts through the stories of Prophets and Salaf, and help everyone to strengthen their connection with Allah.</p>
+                    <a href="#" class="btn btn-outlined" style="padding:8px 20px; font-size:0.85rem;">Read More</a>
                 </div>
             </div>
         </section>
 
     </main>
 
+    <!-- Footer Components Frame -->
     <footer>
         <div class="container footer-grid">
             <div class="footer-brand">
-                <h2 style="font-family: var(--font-heading); letter-spacing:1px; font-size:1.6rem;">IBC</h2>
+                <h2>IBC<span>.</span></h2>
                 <p>Ilm. Iman. Amal. Ikhlaq.</p>
-                <div class="social-row">
-                    <a href="#" class="social-circle"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="#" class="social-circle"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="social-circle"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="social-circle"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
             </div>
-            
             <div>
-                <h4 class="footer-title">Quick Links</h4>
+                <h4 class="footer-title">Navigation</h4>
                 <ul class="footer-links">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Videos</a></li>
                     <li><a href="#">Quiz</a></li>
-                    <li><a href="#">Prophets</a></li>
                 </ul>
             </div>
-
-            <div>
-                <h4 class="footer-title" style="visibility: hidden;">Links 2</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Duas</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-
             <div>
                 <h4 class="footer-title">Newsletter</h4>
-                <p style="color: var(--text-muted); font-size:0.85rem; line-height:1.5;">Stay updated with our latest videos and knowledge.</p>
-                <div class="newsletter-box">
-                    <input type="email" placeholder="Your email address">
-                    <button class="btn btn-filled" style="padding:0 15px; border-radius:4px;"><i class="fa-solid fa-arrow-right"></i></button>
-                </div>
+                <p style="color: var(--text-muted); font-size:0.8rem;">Stay updated with our latest videos.</p>
             </div>
         </div>
-
         <div class="container bottom-bar">
             <span>© 2026 Islamic Bol Chal. All Rights Reserved.</span>
-            <span class="hidden-admin-trigger" onclick="revealSecretPortal()">Workspace Secure Node</span>
+            <span style="opacity:0.3; font-size:0.7rem;">Secure Control Node</span>
         </div>
     </footer>
 
-    <div class="portal-modal-overlay" id="secret-modal">
-        <div class="portal-form-card">
-            <h2>System Control Panel</h2>
-            <div class="input-group">
-                <label>Access Code / Password</label>
-                <input type="password" placeholder="••••••••">
-            </div>
-            <div style="display: flex; gap:10px; justify-content: flex-end;">
-                <button class="btn btn-outlined" style="padding:8px 16px; font-size:0.9rem;" onclick="closeSecretPortal()">Cancel</button>
-                <button class="btn btn-filled" style="padding:8px 20px; font-size:0.9rem;">Authenticate</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Secret portal unlock functions
-        function revealSecretPortal() {
-            document.getElementById("secret-modal").style.display = "flex";
-        }
-        function closeSecretPortal() {
-            document.getElementById("secret-modal").style.display = "none";
-        }
-    </script>
 </body>
 </html>
