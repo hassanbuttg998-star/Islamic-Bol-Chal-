@@ -5,803 +5,964 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Islamic Bol Chal | Premium Educational Platform</title>
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Discover Islam Through Stories, Knowledge & Reflection. Official platform of Islamic Bol Chal.">
-    <meta property="og:title" content="Islamic Bol Chal | Premium Platform">
-    <meta property="og:description" content="Explore powerful Islamic documentaries, Prophet stories, and quizzes.">
-    
-    <!-- Google Fonts (Poppins & Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Supabase Official JS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- Luxury Premium Theme UI Variables --- */
         :root {
-            --primary: #D4AF37;       /* Luxury Gold */
-            --primary-glow: rgba(212, 175, 55, 0.15);
-            --bg-dark: #0B0B0B;       /* Pure Dark Background */
-            --bg-card: #141414;       /* Premium Card BG */
-            --bg-admin: #1A1A1A;      /* Portal Control Panel BG */
-            --text-white: #FFFFFF;
-            --text-muted: #A0A0A0;
-            --font-sans: 'Inter', sans-serif;
+            --bg-darker: #050608;
+            --bg-dark: #0b0d12;
+            --bg-card: #0e1118;
+            --primary-gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.2);
+            --text-white: #ffffff;
+            --text-muted: #8fa0b5;
+            --border-color: rgba(255, 255, 255, 0.05);
             --font-heading: 'Poppins', sans-serif;
-            --transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
+            --font-sans: 'Inter', sans-serif;
         }
 
-        /* --- Global Reset & Scrollbars --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #222;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg-darker);
             color: var(--text-white);
             font-family: var(--font-sans);
-            line-height: 1.6;
             overflow-x: hidden;
         }
 
         .container {
             width: 90%;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
-        /* --- Header Navigation (Premium Glassmorphism) --- */
-        .main-header {
+        /* --- PREMIUM NAVBAR --- */
+        header {
             position: fixed;
-            top: 0; width: 100%; z-index: 100;
-            background: rgba(11, 11, 11, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(5, 6, 8, 0.75);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .header-wrap {
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 0;
+            padding: 20px 0;
         }
 
         .logo {
             display: flex;
-            flex-direction: column;
-            cursor: pointer;
+            align-items: center;
+            gap: 10px;
             text-decoration: none;
         }
 
-        .logo-text {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 1.4rem;
-            letter-spacing: 2px;
-            color: var(--primary);
-            line-height: 1.1;
+        .logo img {
+            height: 45px;
         }
 
-        .logo-sub {
-            font-size: 0.6rem;
-            letter-spacing: 4px;
-            color: var(--text-white);
-            margin-top: 2px;
-        }
-
-        .navbar {
+        .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 32px;
+            list-style: none;
         }
 
-        .nav-link {
+        .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 400;
-            transition: color 0.3s var(--transition-smooth);
+            transition: color 0.3s;
         }
 
-        .nav-link:hover, .nav-link.active {
-            color: var(--primary);
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-gold);
+            text-shadow: 0 0 10px var(--gold-glow);
         }
 
-        .admin-trigger-btn {
-            background: transparent;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            color: var(--primary);
-            padding: 8px 18px;
-            font-size: 0.85rem;
-            border-radius: 4px;
+        .lang-selector-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--text-white);
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
-            font-family: var(--font-sans);
-            font-weight: 500;
-            transition: all 0.3s var(--transition-smooth);
-        }
-
-        .admin-trigger-btn:hover {
-            background: var(--primary);
-            color: var(--bg-dark);
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        /* --- Cinematic Hero Branding Section --- */
-        .hero-section {
-            position: relative;
-            height: 80vh;
             display: flex;
             align-items: center;
-            background: radial-gradient(circle at 50% 35%, #1c1609 0%, var(--bg-dark) 75%);
-            padding-top: 80px;
-            text-align: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
         }
 
-        .hero-content {
-            max-width: 850px;
-            margin: 0 auto;
+        .lang-selector-btn:hover {
+            border-color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.05);
         }
 
-        .tagline {
-            color: var(--primary);
-            font-size: 0.85rem;
-            letter-spacing: 6px;
+        /* --- CINEMATIC HERO SECTION --- */
+        .hero {
+            position: relative;
+            min-height: 95vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at 80% 40%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+                        linear-gradient(to bottom, transparent 70%, var(--bg-darker) 100%),
+                        url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1974') no-repeat center center;
+            background-size: cover;
+            padding-top: 100px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 6, 8, 0.65);
+            z-index: 1;
+        }
+
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-left .welcome-tag {
+            color: var(--primary-gold);
+            font-size: 1rem;
+            letter-spacing: 3px;
             font-weight: 600;
-            display: block;
-            margin-bottom: 20px;
             text-transform: uppercase;
+            margin-bottom: 15px;
         }
 
-        .hero-title {
+        .hero-left h1 {
             font-family: var(--font-heading);
-            font-size: 3.2rem;
+            font-size: 4.2rem;
             font-weight: 700;
             line-height: 1.15;
             margin-bottom: 20px;
-            letter-spacing: -0.5px;
         }
 
-        .hero-desc {
+        .hero-left h1 span {
+            color: var(--primary-gold);
+            position: relative;
+        }
+
+        .hero-left .hero-desc {
             color: var(--text-muted);
-            font-size: 1.15rem;
-            margin-bottom: 40px;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
 
-        /* --- Global CTA Buttons --- */
-        .btn {
-            padding: 12px 30px;
-            border-radius: 4px;
+        .hero-left .vision-pillars {
+            display: flex;
+            gap: 20px;
+            color: var(--primary-gold);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
             font-weight: 500;
-            cursor: pointer;
+            margin-bottom: 40px;
+        }
+
+        .hero-left .vision-pillars span::after {
+            content: '  •';
+            margin-left: 20px;
+            color: rgba(255,255,255,0.2);
+        }
+
+        .hero-left .vision-pillars span:last-child::after { content: ''; }
+
+        .hero-btn-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 14px 32px;
             font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
             text-decoration: none;
-            display: inline-block;
-            transition: all 0.4s var(--transition-smooth);
-            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.4s ease;
         }
 
-        .btn-gold {
-            background: var(--primary);
-            color: var(--bg-dark);
+        .btn-filled {
+            background: var(--primary-gold);
+            color: #000;
             border: none;
-            margin-right: 15px;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
         }
 
-        .btn-gold:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+        .btn-filled:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
         }
 
-        .btn-outline {
+        .btn-outlined {
             background: transparent;
             color: var(--text-white);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .btn-outline:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
+        .btn-outlined:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.02);
+            transform: translateY(-3px);
         }
 
-        /* --- Sections Main Grid Layout --- */
+        /* Hero Right Floating Language Card */
+        .hero-right-card {
+            background: rgba(14, 17, 24, 0.65);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .hero-right-card i.fa-earth-americas {
+            font-size: 2.2rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+        }
+
+        .hero-right-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 5px;
+        }
+
+        .hero-right-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .lang-option {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lang-option:hover, .lang-option.active {
+            border-color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .lang-option img {
+            width: 24px;
+            height: 16px;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .lang-option span {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .card-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 15px;
+        }
+
+        /* --- LATEST VIDEOS ROW --- */
         .section-padding {
-            padding: 80px 0 40px 0;
+            padding: 80px 0;
+            background-color: var(--bg-darker);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
         }
 
         .section-title {
             font-family: var(--font-heading);
-            font-size: 2rem;
-            margin-bottom: 35px;
-            border-left: 4px solid var(--primary);
-            padding-left: 15px;
-            letter-spacing: 0.5px;
-        }
-
-        /* Featured Video Card Layout */
-        .card-featured {
-            background: var(--bg-card);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.02);
+            font-size: 1.8rem;
+            font-weight: 600;
             display: flex;
-            flex-direction: column;
-            transition: border-color 0.4s;
+            align-items: center;
+            gap: 12px;
         }
 
-        .card-featured:hover {
-            border-color: rgba(212, 175, 55, 0.15);
+        .section-title i {
+            color: var(--primary-gold);
         }
 
-        .video-wrapper {
+        .view-all-btn {
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .view-all-btn:hover {
+            background: var(--primary-gold);
+            color: #000;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .video-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .thumb-wrap {
             position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            aspect-ratio: 16/9;
             background: #000;
         }
 
-        .video-wrapper iframe {
+        .thumb-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+
+        .video-card:hover .thumb-wrap img {
+            opacity: 1;
+        }
+
+        .video-duration {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: 0;
-        }
-
-        .featured-info {
-            padding: 35px;
-        }
-
-        .featured-info h3 {
-            font-family: var(--font-heading);
-            font-size: 1.6rem;
-            margin-bottom: 12px;
-            letter-spacing: -0.3px;
-        }
-
-        .featured-info p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-        }
-
-        /* --- Dynamic Grid for Live Supabase Items --- */
-        .dynamic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 30px;
-        }
-
-        .premium-card {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.02);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            transition: transform 0.4s var(--transition-smooth), border-color 0.4s;
-        }
-
-        .premium-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(212, 175, 55, 0.2);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-        }
-
-        .card-badge {
-            position: absolute;
-            top: 25px; left: 35px;
-            color: var(--primary);
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .card-content-area {
-            margin-top: 25px;
-        }
-
-        .card-title {
-            font-family: var(--font-heading);
-            font-size: 1.35rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .arabic-text {
-            font-family: 'Times New Roman', serif;
-            font-size: 1.9rem;
-            text-align: right;
-            direction: rtl;
-            margin: 20px 0;
-            color: #FFFFFF;
-            line-height: 1.7;
-            word-spacing: 2px;
-        }
-
-        .card-desc {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin-bottom: 15px;
-        }
-
-        .card-footer-info {
-            font-size: 0.85rem;
-            color: var(--primary);
+            bottom: 10px; right: 10px;
+            background: rgba(0,0,0,0.8);
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            border-radius: 3px;
             font-weight: 500;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 15px;
-            margin-top: 15px;
         }
 
-        /* --- Supabase Modern Secure Dashboard Overlay Panels --- */
-        .admin-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(15px);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
+        .video-info {
             padding: 20px;
         }
 
-        .admin-panel {
-            background: var(--bg-admin);
-            width: 100%;
-            max-width: 600px;
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            padding: 40px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+        .video-info h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .admin-header {
+        .video-meta-channel {
+            font-size: 0.8rem;
+            color: var(--primary-gold);
+            margin-bottom: 4px;
+        }
+
+        .video-stats {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* --- FEATURED DUAL COLUMN MODULE --- */
+        .split-module-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .featured-doc-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .doc-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .doc-video-mock {
+            position: relative;
+            aspect-ratio: 16/9;
+            background: #151922;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .doc-video-mock img {
+            position: absolute;
+            width:100%; height:100%; object-fit:cover; opacity: 0.5;
+        }
+
+        .play-ring {
+            position: relative; z-index: 2;
+            width: 50px; height: 50px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #000; font-size: 1.2rem;
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .doc-details h4 {
+            font-size: 1.3rem; margin-bottom: 4px; color: var(--primary-gold);
+        }
+
+        .doc-details span {
+            font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 12px;
+        }
+
+        .doc-details p {
+            font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px;
+        }
+
+        /* Today's Question Panel (Glowing Box) */
+        .question-panel {
+            background: linear-gradient(135deg, #0e1118 0%, #080a0f 100%);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .question-box-body {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .urdu-question {
+            font-family: 'Urdu Typesetting', 'Jonamee', 'Noto Nastaliq Urdu', serif;
+            font-size: 1.9rem;
+            line-height: 2.2;
+            direction: rtl;
+            color: var(--text-white);
+            text-shadow: 0 0 15px rgba(255,255,255,0.1);
+        }
+
+        .question-mark-bg {
+            position: absolute;
+            right: 30px; bottom: 20px;
+            font-size: 8rem;
+            color: rgba(212, 175, 55, 0.04);
+            font-weight: 700;
+            pointer-events: none;
+        }
+
+        /* --- CATEGORIES MATRIX --- */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+        }
+
+        .category-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            border-color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.02);
+            transform: translateY(-4px);
+        }
+
+        .category-card i {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .category-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .category-card p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .badge-coming {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary-gold);
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        /* --- ABOUT DEEP REEF FOOTER --- */
+        .about-banner {
+            background: linear-gradient(to right, #0e1118, rgba(14, 17, 24, 0.3)),
+                        url('https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=2071') no-repeat center center;
+            background-size: cover;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 15px;
-        }
-
-        .admin-header h2 {
-            font-family: var(--font-heading);
-            color: var(--primary);
-            font-size: 1.35rem;
-            letter-spacing: 0.5px;
-        }
-
-        .close-admin {
-            background: transparent;
-            border: none;
-            color: var(--text-white);
-            font-size: 1.6rem;
-            cursor: pointer;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            gap: 40px;
             margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
         }
 
-        .form-control {
-            width: 100%;
-            background: #0F0F0F;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 6px;
-            padding: 12px 16px;
-            color: #fff;
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            transition: border-color 0.3s;
-        }
+        .about-text-content { max-width: 600px; }
+        .about-text-content h3 { font-size: 1.8rem; margin-bottom: 15px; font-family: var(--font-heading); }
+        .about-text-content p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 25px; }
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        select.form-control {
-            cursor: pointer;
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 90px;
-        }
-
-        .admin-footer {
-            margin-top: 30px;
+        .about-visual-assets {
             display: flex;
-            justify-content: flex-end;
-            gap: 15px;
+            align-items: center;
+            gap: 30px;
         }
 
-        .logout-btn {
-            background: transparent;
-            border: 1px solid #ff4444;
-            color: #ff4444;
-        }
-        .logout-btn:hover {
-            background: #ff4444;
-            color: white;
+        .about-visual-assets i.fa-book-quran {
+            font-size: 6rem;
+            color: rgba(212, 175, 55, 0.15);
         }
 
-        /* --- Mobile Responsiveness Adjustments --- */
-        @media (max-width: 768px) {
-            .navbar { display: none; }
-            .hero-title { font-size: 2.2rem; }
-            .hero-desc { font-size: 1rem; }
-            .section-title { font-size: 1.6rem; }
-            .featured-info { padding: 25px; }
-            .premium-card { padding: 25px; }
+        /* --- ACTUAL FOOTER COMPONENT --- */
+        footer {
+            background-color: #030406;
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0 30px 0;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand p { color: var(--text-muted); margin-top: 15px; font-size: 0.85rem; }
+        .footer-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 20px; color: var(--text-white); text-transform: uppercase; letter-spacing: 1px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--primary-gold); }
+
+        .social-row { display: flex; gap: 15px; margin-top: 15px; }
+        .social-circle {
+            width: 38px; height: 38px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-muted);
+            text-decoration: none; transition: all 0.3s;
+        }
+        .social-circle:hover { border-color: var(--primary-gold); color: var(--primary-gold); transform: translateY(-2px); }
+
+        .newsletter-box { display: flex; gap: 10px; margin-top: 15px; }
+        .newsletter-box input {
+            background: #090b0f; border: 1px solid var(--border-color); padding: 12px; border-radius: 4px; color: #fff; width: 100%;
+        }
+        .newsletter-box input:focus { outline: none; border-color: var(--primary-gold); }
+
+        .bottom-bar {
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* SECRET SIGN-IN BACKDOOR (Strictly Hidden from Normal Public Sight) */
+        .hidden-admin-trigger {
+            color: var(--text-muted);
+            cursor: default;
+            user-select: none;
+            transition: color 0.2s;
+        }
+        .hidden-admin-trigger:hover {
+            color: var(--primary-gold);
+        }
+
+        /* Clean Admin Portal Overlay Modal Style */
+        .portal-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 4, 6, 0.95); backdrop-filter: blur(15px);
+            z-index: 2000; display: none; align-items: center; justify-content: center;
+        }
+
+        .portal-form-card {
+            background: var(--bg-card); border: 1px solid var(--primary-gold);
+            border-radius: 12px; padding: 40px; width: 100%; max-width: 450px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+
+        .portal-form-card h2 { font-size: 1.5rem; margin-bottom: 20px; color: var(--primary-gold); text-align: center; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; }
+        .input-group input, .input-group select, .input-group textarea {
+            width:100%; background:#050608; border: 1px solid var(--border-color); padding:12px; color:#fff; border-radius:6px;
+        }
+        .input-group input:focus { outline:none; border-color:var(--primary-gold); }
+
+        /* Responsive */
+        @media(max-width: 992px) {
+            .hero-content-wrapper { grid-template-columns: 1fr; }
+            .hero-right-card { max-width: 450px; margin: 0 auto; }
+            .split-module-grid { grid-template-columns: 1fr; }
+            .categories-grid { grid-template-columns: repeat(3, 1fr); }
+            .about-banner { flex-direction: column; text-align: center; padding: 30px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media(max-width: 600px) {
+            .categories-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; }
+            .doc-box { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Grid -->
-    <header class="main-header">
-        <div class="container header-wrap">
+    <header>
+        <div class="container nav-container">
             <a href="#" class="logo">
-                <span class="logo-text">IBC</span>
-                <span class="logo-sub">ISLAMIC BOL CHAL</span>
+                <h2 style="font-family: var(--font-heading); color:#fff; font-size:1.5rem; font-weight:700; letter-spacing:1px;">IBC</h2>
             </a>
-            <nav class="navbar">
-                <a href="#" class="nav-link active">Home</a>
-                <a href="#featured-doc" class="nav-link">Documentaries</a>
-                <a href="#knowledge-hub" class="nav-link">Knowledge Hub</a>
-            </nav>
-            <div class="header-actions">
-                <button class="admin-trigger-btn" id="portal-btn" onclick="openAdminPortal()">Admin Portal</button>
-            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#latest-videos-sec">Videos</a></li>
+                <li><a href="#categories-sec">Quiz</a></li>
+                <li><a href="#categories-sec">Prophets</a></li>
+                <li><a href="#categories-sec">Duas</a></li>
+            </ul>
+            <button class="lang-selector-btn">
+                <i class="fa-solid fa-globe"></i>
+                <span>EN <i class="fa-solid fa-chevron-down" style="font-size:0.7rem; margin-left:3px;"></i></span>
+            </button>
         </div>
     </header>
 
-    <!-- Cinematic Hero Area -->
-    <section class="hero-section">
-        <div class="container hero-content">
-            <span class="tagline">ILM • IMAN • AMAL • IKHLAQ</span>
-            <h1 class="hero-title">Discover Islam Through Stories, Knowledge & Reflection</h1>
-            <p class="hero-desc">Explore powerful Islamic documentaries, Prophet stories, quizzes and authentic knowledge designed to strengthen faith and inspire reflection.</p>
-            <div class="hero-cta">
-                <a href="#featured-doc" class="btn btn-gold">Watch Documentaries</a>
-                <a href="#knowledge-hub" class="btn btn-outline">Explore Knowledge</a>
+    <section class="hero">
+        <div class="container hero-content-wrapper">
+            <div class="hero-left">
+                <span class="welcome-tag">WELCOME TO</span>
+                <h1>Islamic <span>Bol Chal</span></h1>
+                <p class="hero-desc">Discover Islam Through Stories, Knowledge & Reflection</p>
+                <div class="vision-pillars">
+                    <span>ILM</span>
+                    <span>IMAN</span>
+                    <span>AMAL</span>
+                    <span>IKHLAQ</span>
+                </div>
+                <div class="hero-btn-group">
+                    <a href="#latest-videos-sec" class="btn btn-filled"><i class="fa-solid fa-circle-play"></i> Watch Videos</a>
+                    <a href="#categories-sec" class="btn btn-outlined"><i class="fa-solid fa-book-open"></i> Explore Knowledge</a>
+                </div>
+            </div>
+            
+            <div class="hero-right-card">
+                <i class="fa-solid fa-earth-americas"></i>
+                <h3>Choose Your Language</h3>
+                <p>Apni Zubaan Chunein</p>
+                
+                <div class="lang-option active">
+                    <img src="https://flagcdn.com/w40/pk.png" alt="Urdu">
+                    <span>اردو</span>
+                </div>
+                <div class="lang-option">
+                    <img src="https://flagcdn.com/w40/us.png" alt="English">
+                    <span>English</span>
+                </div>
+                <span class="card-note"><i class="fa-solid fa-lock" style="font-size:0.7rem;"></i> Your choice will be saved</span>
             </div>
         </div>
     </section>
 
-    <!-- Main Section Modules -->
-    <main class="container">
-        
-        <!-- HARDCODED SECTION: Videos, Pictures, Links -->
-        <section id="featured-doc" class="section-padding">
-            <h2 class="section-title">Latest Documentary</h2>
-            <div class="card-featured">
-                <div class="video-wrapper">
-                    <!-- [GITHUB ACTION]: Paste your YouTube Video Link Embed ID here directly -->
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+    <main>
+
+        <section id="latest-videos-sec" class="section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h3 class="section-title"><i class="fa-solid fa-film"></i> Latest Videos</h3>
+                    <a href="#" class="view-all-btn">View All Videos <i class="fa-solid fa-arrow-right" style="font-size:0.8rem; margin-left:5px;"></i></a>
                 </div>
-                <div class="featured-info">
-                    <h3>The Rise of Islamic Civilization</h3>
-                    <p>Explore the Golden Age of Islam, its scientific achievements, and its lasting impact on the modern world. This section is managed completely via direct GitHub code replacement updates.</p>
+                
+                <div class="videos-grid">
+                    <div class="video-card">
+                        <div class="thumb-wrap">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964" alt="Qayamat">
+                            <span class="video-duration">18:24</span>
+                        </div>
+                        <div class="video-info">
+                            <h4>Qayamat Ki Nishaniyan</h4>
+                            <p class="video-meta-channel">Islamic Bol Chal</p>
+                            <p class="video-stats">125K views • 3 days ago</p>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <div class="thumb-wrap">
+                            <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?q=80&w=2070" alt="Ark">
+                            <span class="video-duration">21:35</span>
+                        </div>
+                        <div class="video-info">
+                            <h4>Nuh (A.S) Ka Waqia</h4>
+                            <p class="video-meta-channel">Islamic Bol Chal</p>
+                            <p class="video-stats">98K views • 6 days ago</p>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <div class="thumb-wrap">
+                            <img src="https://images.unsplash.com/photo-1590075865003-e48277adc558?q=80&w=1974" alt="Makkah">
+                            <span class="video-duration">16:48</span>
+                        </div>
+                        <div class="video-info">
+                            <h4>Hazrat Ibrahim (A.S) Ki Zindagi</h4>
+                            <p class="video-meta-channel">Islamic Bol Chal</p>
+                            <p class="video-stats">76K views • 1 week ago</p>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <div class="thumb-wrap">
+                            <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=2070" alt="Safar">
+                            <span class="video-duration">19:12</span>
+                        </div>
+                        <div class="video-info">
+                            <h4>Hazrat Musa (A.S) Ka Safar</h4>
+                            <p class="video-meta-channel">Islamic Bol Chal</p>
+                            <p class="video-stats">88K views • 1 week ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split-module-grid">
+                    
+                    <div class="featured-doc-panel">
+                        <h3 class="section-title" style="font-size:1.4rem; margin-bottom:10px;"><i class="fa-solid fa-clapperboard"></i> Featured Documentary</h3>
+                        <div class="doc-box">
+                            <div class="doc-video-mock">
+                                <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?q=80&w=2070" alt="Nuh Arc">
+                                <div class="play-ring"><i class="fa-solid fa-play" style="margin-left:3px;"></i></div>
+                            </div>
+                            <div class="doc-details">
+                                <h4>Prophet Nuh (A.S)</h4>
+                                <span>Documentary</span>
+                                <p>Complete story of Prophet Nuh (A.S) – Lessons, Faith and Divine Guidance.</p>
+                                <button class="btn btn-filled" style="padding:10px 20px; font-size:0.9rem;"><i class="fa-solid fa-play"></i> Watch Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-panel">
+                        <h3 class="section-title" style="font-size:1.4rem;"><i class="fa-solid fa-circle-question"></i> Today's Islamic Question</h3>
+                        <div class="question-box-body">
+                            <p class="urdu-question">قیامت سے پہلے کونسا نشان سب سے پہلے ظاہر ہوگا؟</p>
+                        </div>
+                        <button class="btn btn-filled" style="width:100%; justify-content:center; background:#141923; color:var(--primary-gold); border:1px solid rgba(212,175,55,0.3); box-shadow:none;">
+                            Discover Answer <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <div class="question-mark-bg">?</div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- DYNAMIC SECTION: Loaded automatically via Supabase -->
-        <section id="knowledge-hub" class="section-padding">
-            <h2 class="section-title">Knowledge & Reflections</h2>
-            <div class="dynamic-grid" id="content-display-grid">
-                <div style="color: var(--text-muted);">Syncing secure database storage entries...</div>
+        <section id="categories-sec" class="section-padding" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+            <div class="container">
+                <div class="section-header">
+                    <h3 class="section-title"><i class="fa-solid fa-grip"></i> Explore Our Topics</h3>
+                </div>
+                
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <i class="fa-solid fa-mosque"></i>
+                        <h4>Prophets Stories</h4>
+                        <p>Qissay, Seerat aur Sabak Amoz Waqiat</p>
+                    </div>
+                    <div class="category-card">
+                        <i class="fa-solid fa-hands-holding-child"></i>
+                        <h4>Duas Library</h4>
+                        <p>Rozana ki Duain Aur Azkar</p>
+                    </div>
+                    <div class="category-card">
+                        <i class="fa-solid fa-brain"></i>
+                        <h4>Islamic Quiz</h4>
+                        <p>Apne Deeni Ilm Ko Barhayein</p>
+                    </div>
+                    <div class="category-card">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                        <h4>Articles</h4>
+                        <p>Deeni Maloomat Aur Tahqeeqi Articles</p>
+                    </div>
+                    <div class="category-card" style="opacity: 0.7;">
+                        <i class="fa-solid fa-comments"></i>
+                        <h4>Ask Islam</h4>
+                        <p>Deeni Masail Ka Hal</p>
+                        <span class="badge-coming">Coming Soon</span>
+                    </div>
+                    <div class="category-card">
+                        <i class="fa-solid fa-video"></i>
+                        <h4>Videos</h4>
+                        <p>Islamic Documentaries Aur Short Clips</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="about-banner">
+                    <div class="about-text-content">
+                        <h3>About Islamic Bol Chal</h3>
+                        <p>Islamic Bol Chal is an effort to spread authentic Islamic knowledge, inspire hearts through the stories of Prophets and Salaf, and help everyone to strengthen their connection with Allah. Our mission is simple – Ilm, Iman, Amal, Ikhlaq.</p>
+                        <a href="#" class="btn btn-outlined" style="padding:10px 24px; font-size:0.9rem;">Read More About Us <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="about-visual-assets">
+                        <i class="fa-solid fa-book-quran"></i>
+                    </div>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <!-- --- Supabase Action Overlay Overlay Views --- -->
-    <div id="admin-overlay" class="admin-overlay">
-        
-        <!-- VIEW A: Account Identity Challenge (Normal Login Form) -->
-        <div class="admin-panel" id="view-login" style="display: block;">
-            <div class="admin-header">
-                <h2>IBC Secure Portal Identity</h2>
-                <button class="close-admin" onclick="closeAdminPortal()">&times;</button>
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h2 style="font-family: var(--font-heading); letter-spacing:1px; font-size:1.6rem;">IBC</h2>
+                <p>Ilm. Iman. Amal. Ikhlaq.</p>
+                <div class="social-row">
+                    <a href="#" class="social-circle"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="social-circle"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-circle"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-circle"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Admin Account Email</label>
-                <input type="email" id="login-email" class="form-control" placeholder="admin@islamicbolchal.com">
+            
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Videos</a></li>
+                    <li><a href="#">Quiz</a></li>
+                    <li><a href="#">Prophets</a></li>
+                </ul>
             </div>
-            <div class="form-group">
-                <label>Secure Password</label>
-                <input type="password" id="login-password" class="form-control" placeholder="••••••••">
+
+            <div>
+                <h4 class="footer-title" style="visibility: hidden;">Links 2</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Duas</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
             </div>
-            <div class="admin-footer">
-                <button class="btn btn-gold" onclick="handleSupabaseLogin()">Access Workspace</button>
+
+            <div>
+                <h4 class="footer-title">Newsletter</h4>
+                <p style="color: var(--text-muted); font-size:0.85rem; line-height:1.5;">Stay updated with our latest videos and knowledge.</p>
+                <div class="newsletter-box">
+                    <input type="email" placeholder="Your email address">
+                    <button class="btn btn-filled" style="padding:0 15px; border-radius:4px;"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
             </div>
         </div>
 
-        <!-- VIEW B: Dynamic Control Board Workspace -->
-        <div class="admin-panel" id="view-workspace" style="display: none;">
-            <div class="admin-header">
-                <h2>IBC Platform Control Center</h2>
-                <button class="close-admin" onclick="closeAdminPortal()">&times;</button>
-            </div>
-            
-            <div class="form-group">
-                <label>Content Stream / Category</label>
-                <select id="content-type" class="form-control">
-                    <option value="Dua">Dua</option>
-                    <option value="Article">Article / Reflection</option>
-                    <option value="Quiz">Islamic Quiz Concept</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label>Item Title / Concept Name</label>
-                <input type="text" id="content-title" class="form-control" placeholder="e.g., Morning Protection Remembrance">
-            </div>
+        <div class="container bottom-bar">
+            <span>© 2026 Islamic Bol Chal. All Rights Reserved.</span>
+            <span class="hidden-admin-trigger" onclick="revealSecretPortal()">Workspace Secure Node</span>
+        </div>
+    </footer>
 
-            <div class="form-group">
-                <label>Arabic Scripture (Optional for Duas)</label>
-                <input type="text" id="content-arabic" class="form-control" style="text-align: right; direction: rtl;" placeholder="اللَّهُمَّ بكَ أصْبَحْنَا...">
+    <div class="portal-modal-overlay" id="secret-modal">
+        <div class="portal-form-card">
+            <h2>System Control Panel</h2>
+            <div class="input-group">
+                <label>Access Code / Password</label>
+                <input type="password" placeholder="••••••••">
             </div>
-
-            <div class="form-group">
-                <label>Core Description / Translation Breakdown</label>
-                <textarea id="content-description" class="form-control" placeholder="Write comprehensive narrative, explanation or translation data..."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Authentic Source / Reference Citation</label>
-                <input type="text" id="content-reference" class="form-control" placeholder="e.g., Sahih Bukhari 6320 / Surah Al-Baqarah 152">
-            </div>
-
-            <div class="admin-footer">
-                <button class="btn logout-btn" onclick="handleSupabaseLogout()">Lock Portal</button>
-                <button class="btn btn-gold" onclick="handleSubmitContent()">Publish Live Feed</button>
+            <div style="display: flex; gap:10px; justify-content: flex-end;">
+                <button class="btn btn-outlined" style="padding:8px 16px; font-size:0.9rem;" onclick="closeSecretPortal()">Cancel</button>
+                <button class="btn btn-filled" style="padding:8px 20px; font-size:0.9rem;">Authenticate</button>
             </div>
         </div>
-
     </div>
 
-    <!-- --- System Javascript Sync Engine Engine --- -->
     <script>
-        // Global engine instance
-        var supabaseClientInstance = null;
-
-        // Dynamic Engine Initialization
-        function initializeSupabaseEngine() {
-            const SUPABASE_URL = "https://wbzbpoiuacltiaptmkfv.supabase.co";
-            const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiemJwb2l1YWNsdGlhcHRta2Z2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0NjM1MDksImV4cCI6MjA5ODAzOTUwOX0.zdcw_M_gCg8xIyquYMu44DtSe_70hSpgAQVOiedwVPk";
-
-            try {
-                if (window.supabase && window.supabase.createClient) {
-                    supabaseClientInstance = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                    console.log("Supabase Engine Active.");
-                    return true;
-                }
-            } catch (err) {
-                console.error("Initialization failed:", err);
-            }
-            return false;
+        // Secret portal unlock functions
+        function revealSecretPortal() {
+            document.getElementById("secret-modal").style.display = "flex";
         }
-
-        // Run instantly when window loads
-        window.onload = function() {
-            var standardChecks = initializeSupabaseEngine();
-            if(standardChecks) {
-                fetchLiveContentHub();
-                listenToUserSession();
-            } else {
-                setTimeout(function() {
-                    if(initializeSupabaseEngine()) {
-                        fetchLiveContentHub();
-                        listenToUserSession();
-                    }
-                }, 1000);
-            }
-        };
-
-        // 1. MODAL TOGGLE INTERFACE VIEWS MANAGER
-        async function openAdminPortal() {
-            document.getElementById("admin-overlay").style.display = "flex";
-            
-            if (supabaseClientInstance) {
-                try {
-                    const { data, error } = await supabaseClientInstance.auth.getSession();
-                    if (data && data.session) {
-                        showWorkspaceView();
-                        return;
-                    }
-                } catch(e) {}
-            }
-            showLoginView();
-        }
-
-        function closeAdminPortal() {
-            document.getElementById("admin-overlay").style.display = "none";
-        }
-
-        function showLoginView() {
-            document.getElementById("view-login").style.display = "block";
-            document.getElementById("view-workspace").style.display = "none";
-        }
-
-        function showWorkspaceView() {
-            document.getElementById("view-login").style.display = "none";
-            document.getElementById("view-workspace").style.display = "block";
-        }
-
-        // 2. ACCOUNT CONTROL LAYER
-        async function handleSupabaseLogin() {
-            if(!supabaseClientInstance) { 
-                alert("Database engine down. Please refresh."); 
-                return; 
-            }
-            
-            const email = document.getElementById("login-email").value.trim();
-            const password = document.getElementById("login-password").value;
-
-            if(!email || !password) {
-                alert("Please provide both active account authorization details.");
-                return;
-            }
-
-            try {
-                const { data, error } = await supabaseClientInstance.auth.signInWithPassword({
-                    email: email,
-                    password: password,
-                });
-
-                if (error) {
-                    alert("Auth Rejection: " + error.message);
-                } else {
-                    showWorkspaceView();
-                }
-            } catch(err) {
-                alert("Login Error: " + err.message);
-            }
-        }
-
-        async function handleSupabaseLogout() {
-            if(!supabaseClientInstance) return;
-            await supabaseClientInstance.auth.signOut();
-            showLoginView();
-            alert("Workspace Session Closed Safely.");
-        }
-
-        function listenToUserSession() {
-            if(!supabaseClientInstance) return;
-            supabaseClientInstance.auth.onAuthStateChange((event, session) => {
-                if (session) {
-                    document.getElementById("portal-btn").innerText = "Dashboard";
-                } else {
-                    document.getElementById("portal-btn").innerText = "Admin Portal";
-                }
-            });
-        }
-
-        // 3. READ MATRIX STREAM
-        async function fetchLiveContentHub() {
-            const grid = document.getElementById("content-display-grid");
-            if(!supabaseClientInstance) return;
-            
-            try {
-                const { data: ibc_content, error } = await supabaseClientInstance
-                    .from('ibc_content')
-                    .select('*')
-                    .order('created_at', { ascending: false });
-
-                if (error) {
-                    grid.innerHTML = `<div style="color: #ff4444;">Database Sync Error: ${error.message}</div>`;
-                    return;
-                }
-
-                if (!ibc_content || ibc_content.length === 0) {
-                    grid.innerHTML = `<div style="color: var(--text-muted);">The knowledge treasury is currently empty. Login to add the first post.</div>`;
-                    return;
-                }
-
-                grid.innerHTML = "";
-                ibc_content.forEach(item => {
-                    const card = document.createElement("div");
-                    card.className = "premium-card";
-                    
-                    let arabicSegment = item.arabic ? `<p class="arabic-text">${item.arabic}</p>` : '';
-                    
-                    card.innerHTML = `
-                        <div>
-                            <span class="card-badge">${item.type}</span>
-                            <div class="card-content-area">
-                                <h4 class="card-title">${item.title}</h4>
-                                ${arabicSegment}
-                                <p class="card-desc">${item.description}</p>
-                            </div>
-                        </div>
-                        <div class="card-footer-info">${item.reference || 'Authentic Islamic Bol Chal Repository'}</div>
-                    `;
-                    grid.appendChild(card);
-                });
-            } catch(e) {
-                console.error(e);
-            }
-        }
-
-        // 4. WRITE TRANSACTION
-        async function handleSubmitContent() {
-            if(!supabaseClientInstance) return;
-            
-            const type = document.getElementById("content-type").value;
-            const title = document.getElementById("content-title").value.trim();
-            const arabic = document.getElementById("content-arabic").value.trim();
-            const description = document.getElementById("content-description").value.trim();
-            const reference = document.getElementById("content-reference").value.trim();
-
-            if(!title || !description) {
-                alert("Concept Title and Translation/Description data are mandatory entries.");
-                return;
-            }
-
-            try {
-                const { error } = await supabaseClientInstance
-                    .from('ibc_content')
-                    .insert([{ 
-                        type: type, 
-                        title: title, 
-                        arabic: arabic, 
-                        description: description, 
-                        reference: reference 
-                    }]);
-
-                if (error) {
-                    alert("Failed to post: " + error.message);
-                } else {
-                    alert("Alhamdulillah! Content published instantly.");
-                    document.getElementById("content-title").value = "";
-                    document.getElementById("content-arabic").value = "";
-                    document.getElementById("content-description").value = "";
-                    document.getElementById("content-reference").value = "";
-                    
-                    closeAdminPortal();
-                    fetchLiveContentHub();
-                }
-            } catch(err) {
-                alert("Submission error: " + err.message);
-            }
+        function closeSecretPortal() {
+            document.getElementById("secret-modal").style.display = "none";
         }
     </script>
 </body>
