@@ -132,7 +132,7 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(5, 6, 8, 0.85);
+            background: rgba(5, 6, 8, 0.8);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
@@ -188,20 +188,25 @@
             font-size: 0.8rem;
         }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION WITH YOUR UPLOADED MOSQUE IMAGE --- */
         .hero {
             position: relative;
-            min-height: 85vh;
+            min-height: 95vh;
             display: flex;
             align-items: center;
-            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 70%), var(--bg-darker);
-            padding-top: 120px;
-            padding-bottom: 40px;
+            background: linear-gradient(to bottom, rgba(5, 6, 8, 0.4) 0%, rgba(5, 6, 8, 0.95) 90%), 
+                        radial-gradient(circle at 50% 40%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+                        url('images/masjid.png') no-repeat center center;
+            background-size: cover;
+            padding-top: 140px;
+            padding-bottom: 60px;
         }
 
         .hero-content-wrapper {
             width: 100%;
             text-align: center;
+            position: relative;
+            z-index: 5;
         }
 
         .hero-left .welcome-tag {
@@ -216,10 +221,11 @@
 
         .hero-left h1 {
             font-family: var(--font-heading);
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 15px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
         .hero-left h1 span {
@@ -227,13 +233,15 @@
         }
 
         .hero-left .hero-desc {
-            color: var(--text-muted);
-            font-size: 1.15rem;
-            margin-bottom: 25px;
+            color: var(--text-white);
+            font-size: 1.25rem;
+            margin-bottom: 30px;
             line-height: 1.6;
-            max-width: 600px;
+            max-width: 650px;
             margin-left: auto;
             margin-right: auto;
+            opacity: 0.9;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
 
         .hero-left .vision-pillars {
@@ -241,17 +249,17 @@
             justify-content: center;
             gap: 15px;
             color: var(--primary-gold);
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            font-weight: 500;
-            margin-bottom: 35px;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 40px;
             flex-wrap: wrap;
         }
 
         .hero-left .vision-pillars span::after {
             content: '  •';
             margin-left: 15px;
-            color: rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.3);
         }
         .hero-left .vision-pillars span:last-child::after { content: ''; }
 
@@ -260,6 +268,44 @@
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-filled {
+            background: var(--primary-gold);
+            color: #000;
+            border: none;
+        }
+
+        .btn-filled:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-outlined {
+            background: rgba(0, 0, 0, 0.4);
+            color: var(--text-white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-outlined:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+            transform: translateY(-2px);
         }
 
         /* --- VIDEOS ROW GRID --- */
@@ -377,7 +423,6 @@
         }
         .urdu-question {
             font-size: 1.5rem; line-height: 2; text-align: center; padding: 15px 0; color: #fff;
-            font-family: inherit;
         }
 
         /* --- TOPICS MATRIX --- */
@@ -429,17 +474,18 @@
 
         /* --- RESPONSIVE QUERIES BREAKPOINTS --- */
         @media (max-width: 992px) {
-            .hero-left h1 { font-size: 2.5rem; }
+            .hero-left h1 { font-size: 2.8rem; }
             .videos-grid { grid-template-columns: repeat(2, 1fr); }
             .split-module-grid { grid-template-columns: 1fr; }
             .categories-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
         @media (max-width: 600px) {
-            .nav-links { display: none; } /* Hide heavy menu rows on phone */
-            .hero-left h1 { font-size: 2.1rem; }
-            .hero-left .hero-desc { font-size: 1rem; }
-            .videos-grid { grid-template-columns: 1fr; } /* Perfect Single Card Flow on Mobile */
+            .nav-links { display: none; }
+            .hero { min-height: 80vh; padding-top: 120px; }
+            .hero-left h1 { font-size: 2.2rem; }
+            .hero-left .hero-desc { font-size: 1.05rem; }
+            .videos-grid { grid-template-columns: 1fr; } 
             .doc-box { grid-template-columns: 1fr; }
             .categories-grid { grid-template-columns: repeat(2, 1fr); }
             .section-title { font-size: 1.3rem; }
@@ -454,7 +500,7 @@
     <!-- INTERACTIVE LANGUAGE SELECTION MODAL -->
     <div class="lang-overlay" id="languageModal">
         <div class="hero-right-card">
-            <i class="fa-solid fa-earth-americas"></i>
+            <i class="fa-solid fa-earth-americas" style="font-size: 2.2rem; color: var(--primary-gold); margin-bottom: 15px; display:inline-block;"></i>
             <h3>Choose Your Language</h3>
             <p>Apni Zubaan Chunein</p>
             
@@ -490,7 +536,7 @@
         </div>
     </header>
 
-    <!-- CLEAN LUXURY DYNAMIC HERO COMPONENT -->
+    <!-- CLEAN LUXURY DYNAMIC HERO COMPONENT (With Mosque Graphic Asset Layer) -->
     <section class="hero">
         <div class="container hero-content-wrapper">
             <div class="hero-left">
@@ -514,7 +560,7 @@
     <!-- CORE PLATFORM TRACK CONTENT -->
     <main>
 
-        <!-- MODULE 1: Latest Videos Track Row (Using Your Original Images) -->
+        <!-- MODULE 1: Latest Videos Track Row -->
         <section id="latest-videos-sec" class="section-padding">
             <div class="container">
                 <div class="section-header">
@@ -664,14 +710,13 @@
                 <h2>IBC<span>.</span></h2>
                 <p>Ilm. Iman. Amal. Ikhlaq. Content platform delivering standard cinematic reminders.</p>
                 
-                <!-- All Verified Original Client Links Connected Here -->
                 <div class="social-row">
                     <a href="https://youtube.com/@islamicbolchal?si=xQDaUY2MSSS7l1vE" target="_blank" class="social-circle"><i class="fa-brands fa-youtube"></i></a>
                     <a href="https://www.facebook.com/share/18VaP8V5cu/" target="_blank" class="social-circle"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="https://www.instagram.com/islamic_bol.chal?igsh=MTJ3bm9ra3FvZ3NjYw==" target="_blank" class="social-circle"><i class="fa-brands fa-instagram"></i></a>
                     <a href="https://www.tiktok.com/@islamic_bol_chal?_r=1&_t=ZS-95uKFFRlgwx" target="_blank" class="social-circle"><i class="fa-brands fa-tiktok"></i></a>
                     <a href="https://x.com/2oHazzy24404" target="_blank" class="social-circle"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="https://whatsapp.com/channel/0029VbClXOFAO7RPDWkjrV43" target="_blank" class="social-circle"><i class="fa-solid fa-circle-nodes"></i></a> <!-- Node Icon for WhatsApp channel link representation -->
+                    <a href="https://whatsapp.com/channel/0029VbClXOFAO7RPDWkjrV43" target="_blank" class="social-circle"><i class="fa-solid fa-circle-nodes"></i></a>
                 </div>
             </div>
             <div>
@@ -699,7 +744,6 @@
             const modal = document.getElementById("languageModal");
             const savedLang = localStorage.getItem("userLanguage");
             
-            // Agar language pehle select nahi hui, to modal display karein smoothly
             if (!savedLang) {
                 setTimeout(() => {
                     modal.classList.add("show");
@@ -707,7 +751,6 @@
             }
         });
 
-        // Language Select hone par run hone wala function
         function selectLanguage(lang) {
             localStorage.setItem("userLanguage", lang);
             const modal = document.getElementById("languageModal");
@@ -715,7 +758,6 @@
             console.log("Language Node Saved: " + lang);
         }
 
-        // Language Reset Button triggered manually from nav link click configuration
         function resetLanguage() {
             const modal = document.getElementById("languageModal");
             modal.classList.add("show");
