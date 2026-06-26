@@ -602,20 +602,42 @@
     <!-- --- System Javascript Sync Engine Engine --- -->
     <script>
         // 1. FIXED SUPABASE INJECTED CREDENTIALS HOOKS
+        // 1. FIXED SUPABASE INJECTED CREDENTIALS HOOKS
         const SUPABASE_URL = "https://wbzbpoiuacltiaptmkfv.supabase.co";
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiemJwb2l1YWNsdGlhcHRta2Z2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0NjM1MDksImV4cCI6MjA5ODAzOTUwOX0.zdcw_M_gCg8xIyquYMu44DtSe_70hSpgAQVOiedwVPk";
 
-        // Connect Supabase Engine Client
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        let supabase;
+
+        // Secure Initialization
+        try {
+            if (typeof supabase === 'undefined' && window.supabase) {
+                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                console.log("Supabase connected successfully!");
+            }
+        } catch (e) {
+            console.error("Supabase init error:", e);
+        }
 
         // Bootstrap Core App Hooks
         document.addEventListener("DOMContentLoaded", () => {
-            fetchLiveContentHub();
-            listenToUserSession();
+            if (supabase) {
+                fetchLiveContentHub();
+                listenToUserSession();
+            } else {
+                // If CDN was slow, try again in 1 second
+                setTimeout(() => {
+                    if (window.supabase) {
+                        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                        fetchLiveContentHub();
+                        listenToUserSession();
+                    }
+                }, 1000);
+            }
         });
 
         // 2. ACCOUNT CONTROL LAYER (Email Login / Out Procedures)
         async function handleSupabaseLogin() {
+            if(!supabase) { alert("Database not ready yet. Please refresh."); return; }
             const email = document.getElementById("login-email").value;
             const password = document.getElementById("login-password").value;
 
@@ -637,12 +659,14 @@
         }
 
         async function handleSupabaseLogout() {
+            if(!supabase) return;
             await supabase.auth.signOut();
             showLoginView();
             alert("Workspace Session Closed Safely.");
         }
 
         function listenToUserSession() {
+            if(!supabase) return;
             supabase.auth.onAuthStateChange((event, session) => {
                 if (session) {
                     document.getElementById("portal-btn").innerText = "Dashboard";
@@ -652,9 +676,10 @@
             });
         }
 
-        // 3. READ MATRIX STREAM (Fetch data automatically inside dynamic web UI grid blocks)
+        // 3. READ MATRIX STREAM
         async function fetchLiveContentHub() {
             const grid = document.getElementById("content-display-grid");
+            if(!supabase) return;
             
             const { data: ibc_content, error } = await supabase
                 .from('ibc_content')
@@ -693,8 +718,9 @@
             });
         }
 
-        // 4. WRITE TRANSACTION (Upload Form to Database Matrix Columns)
+        // 4. WRITE TRANSACTION
         async function handleSubmitContent() {
+            if(!supabase) return;
             const type = document.getElementById("content-type").value;
             const title = document.getElementById("content-title").value;
             const arabic = document.getElementById("content-arabic").value;
@@ -720,23 +746,26 @@
                 alert("Failed to post: " + error.message);
             } else {
                 alert("Alhamdulillah! Content published instantly.");
-                // Reset form values completely
                 document.getElementById("content-title").value = "";
                 document.getElementById("content-arabic").value = "";
                 document.getElementById("content-description").value = "";
                 document.getElementById("content-reference").value = "";
                 
                 closeAdminPortal();
-                fetchLiveContentHub(); // Rerender instant live UI card entries
+                fetchLiveContentHub();
             }
         }
 
         // 5. MODAL TOGGLE INTERFACE VIEWS MANAGER
         async function openAdminPortal() {
             document.getElementById("admin-overlay").style.display = "flex";
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session) {
-                showWorkspaceView();
+            if(supabase) {
+                const { data: { session } } = await supabase.auth.getSession();
+                if (session) {
+                    showWorkspaceView();
+                } else {
+                    showLoginView();
+                }
             } else {
                 showLoginView();
             }
