@@ -558,75 +558,166 @@
     </section>
 
     <!-- CORE PLATFORM TRACK CONTENT -->
+    <!-- CORE PLATFORM TRACK CONTENT -->
     <main>
 
-        <!-- MODULE 1: Latest Videos Track Row -->
-        <section id="latest-videos-sec" class="section-padding">
+        <!-- MODULE 1: Dual Segment Info Block (Moved to the Top) -->
+        <section class="section-padding" style="padding-top: 40px; padding-bottom: 20px;">
             <div class="container">
-                <div class="section-header">
-                    <h3 class="section-title"><i class="fa-solid fa-film"></i> Latest Videos</h3>
+                <div class="split-module-grid">
+                    
+                    <!-- Featured Documentary Box -->
+                    <div class="featured-doc-panel">
+                        <h3 class="section-title" style="font-size:1.2rem; margin-bottom:15px;"><i class="fa-solid fa-clapperboard"></i> Featured Documentary</h3>
+                        <div class="doc-box">
+                            <a href="https://youtu.be/rI8pQoPGV1E?si=34QHfct5eq5BDTuA" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                                <div class="doc-video-mock">
+                                    <img src="Image/Adam.png" alt="Hazrat Adam (A.S)">
+                                    <div class="play-ring"><i class="fa-solid fa-play" style="font-size:0.9rem; margin-left:2px;"></i></div>
+                                </div>
+                            </a>
+                            <div class="doc-details">
+                                <h4>Hazrat Adam (A.S)</h4>
+                                <span style="color: var(--primary-gold); font-size: 0.8rem; font-weight: 500; display: block; margin-bottom: 5px;">Documentary</span>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4;">Complete cinematic story of Prophet Adam (A.S).</p>
+                                <a href="https://youtu.be/rI8pQoPGV1E?si=34QHfct5eq5BDTuA" target="_blank" class="btn btn-filled" style="padding:8px 16px; font-size:0.8rem; display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-play"></i> Watch Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Islamic Quiz Box -->
+                    <div class="question-panel">
+                        <h3 class="section-title" style="font-size:1.2rem; margin-bottom:15px;"><i class="fa-solid fa-circle-question"></i> Islamic Quiz</h3>
+                        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 30px 20px; border-radius: 12px; text-align: center; height: calc(100% - 40px); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px;">
+                            <p class="urdu-question" style="font-size: 1.4rem; font-weight: 500; color: #fff; direction: rtl; line-height: 1.6; margin: 0;">قیامت سے پہلے کونسا نشان سب سے پہلے ظاہر ہوگا؟</p>
+                            <button class="btn btn-filled" style="width:100%; justify-content:center; background:#141923; color:var(--primary-gold); border:1px solid rgba(212,175,55,0.2); font-size:0.85rem; padding: 12px;">
+                                Discover Answer
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE 2: Latest Videos Track Row (Moved below Featured section) -->
+        <section id="latest-videos-sec" class="section-padding" style="padding-top: 20px;">
+            <div class="container">
+                <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 class="section-title" style="margin: 0;"><i class="fa-solid fa-film"></i> Latest Videos</h3>
                     <a href="videos.html" class="view-all-btn">View All</a>
                 </div>
                 
                 <div class="videos-grid">
-                    <!-- Card 1: Qayamat -->
-                    <div class="video-card">
-                        <div class="thumb-wrap">
-                            <img src="Image/Qayamt.png" alt="Qayamat Ki Nishaniyan">
-                            <span class="video-duration">18:24</span>
+                    <!-- Card 1 -->
+                    <a href="https://youtu.be/dpHUkgJHszY?si=kUyIIxqiZ-pAJUe4" target="_blank" style="text-decoration: none; color: inherit;">
+                        <div class="video-card">
+                            <div class="thumb-wrap">
+                                <img src="Image/Qayamt.png" alt="Qayamat Ki Nishaniyan">
+                                <span class="video-duration">5:19</span>
+                            </div>
+                            <div class="video-info">
+                                <h4>Qayamt ki 6 khofnak nishaniyan</h4>
+                                <p class="video-meta-channel">Islamic Bol Chal</p>
+                            </div>
                         </div>
-                        <div class="video-info">
-                            <h4>Qayamat Ki Nishaniyan</h4>
-                            <p class="video-meta-channel">Islamic Bol Chal</p>
-                            <p class="video-stats">125K views • 3 days ago</p>
+                    </a>
+                    <!-- Card 2 -->
+                    <a href="https://youtu.be/rI8pQoPGV1E?si=34QHfct5eq5BDTuA" target="_blank" style="text-decoration: none; color: inherit;">
+                        <div class="video-card">
+                            <div class="thumb-wrap">
+                                <img src="Image/Adam.png" alt="Hazrat Adam (A.S)">
+                                <span class="video-duration">9:42</span>
+                            </div>
+                            <div class="video-info">
+                                <h4>Hazrat aadam (A.S) Ki Zindagi</h4>
+                                <p class="video-meta-channel">Islamic Bol Chal</p>
+                            </div>
                         </div>
+                    </a>
+                    <!-- Card 3 -->
+                    <a href="https://youtu.be/lBKzJ08go8M?si=WcSZKIuocv8-v9M0" target="_blank" style="text-decoration: none; color: inherit;">
+                        <div class="video-card">
+                            <div class="thumb-wrap">
+                                <img src="Image/Qabar.png" alt="Qabar Ka Manzar">
+                                <span class="video-duration">9:09</span>
+                            </div>
+                            <div class="video-info">
+                                <h4>Are you ready for this</h4>
+                                <p class="video-meta-channel">Islamic Bol Chal</p>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Card 4 -->
+                    <a href="https://youtu.be/NTMbx7SzicY?si=Y29NOt2qIO3trkrR" target="_blank" style="text-decoration: none; color: inherit;">
+                        <div class="video-card">
+                            <div class="thumb-wrap">
+                                <img src="Image/Shis.png" alt="Hazrat Shis (A.S)">
+                                <span class="video-duration">7:22</span>
+                            </div>
+                            <div class="video-info">
+                                <h4>story of Hazrat shis (A.S)</h4>
+                                <p class="video-meta-channel">Islamic Bol Chal</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE 3: Topics Grid -->
+        <section id="categories-sec" class="section-padding" style="border-top: 1px solid var(--border-color); padding-top: 40px;">
+            <div class="container">
+                <div class="section-header" style="margin-bottom: 20px;">
+                    <h3 class="section-title"><i class="fa-solid fa-grip"></i> Our Topics</h3>
+                </div>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <i class="fa-solid fa-mosque"></i>
+                        <h4>Prophets</h4>
+                        <p>Seerat Waqiat</p>
                     </div>
-                    <!-- Card 2: Hazrat Adam (A.S) -->
-                    <div class="video-card">
-                        <div class="thumb-wrap">
-                            <img src="Image/Adam.png" alt="Hazrat Adam (A.S)">
-                            <span class="video-duration">21:35</span>
-                        </div>
-                        <div class="video-info">
-                            <h4>Hazrat Adam (A.S) Ka Waqia</h4>
-                            <p class="video-meta-channel">Islamic Bol Chal</p>
-                            <p class="video-stats">98K views • 6 days ago</p>
-                        </div>
+                    <div class="category-card">
+                        <i class="fa-solid fa-hands-holding-child"></i>
+                        <h4>Duas</h4>
+                        <p>Azkar Library</p>
                     </div>
-                    <!-- Card 3: Qabar -->
-                    <div class="video-card">
-                        <div class="thumb-wrap">
-                            <img src="Image/Qabar.png" alt="Qabar Ka Manzar">
-                            <span class="video-duration">16:48</span>
-                        </div>
-                        <div class="video-info">
-                            <h4>Qabar Ka Manzar Aur Azab</h4>
-                            <p class="video-meta-channel">Islamic Bol Chal</p>
-                            <p class="video-stats">76K views • 1 week ago</p>
-                        </div>
+                    <div class="category-card">
+                        <i class="fa-solid fa-brain"></i>
+                        <h4>Quiz</h4>
+                        <p>Deeni Ilm</p>
                     </div>
-                    <!-- Card 4: Hazrat Shis (A.S) -->
-                    <div class="video-card">
-                        <div class="thumb-wrap">
-                            <img src="Image/Shis.png" alt="Hazrat Shis (A.S)">
-                            <span class="video-duration">19:12</span>
-                        </div>
-                        <div class="video-info">
-                            <h4>Hazrat Shis (A.S) Ki Zindagi</h4>
-                            <p class="video-meta-channel">Islamic Bol Chal</p>
-                            <p class="video-stats">88K views • 1 week ago</p>
-                        </div>
+                    <div class="category-card">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                        <h4>Articles</h4>
+                        <p>Tahqeeq</p>
+                    </div>
+                    <div class="category-card" style="opacity: 0.6;">
+                        <i class="fa-solid fa-comments"></i>
+                        <h4>Ask Islam</h4>
+                        <span class="badge-coming">Soon</span>
+                    </div>
+                    <div class="category-card">
+                        <i class="fa-solid fa-video"></i>
+                        <h4>Clips</h4>
+                        <p>Shorts</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- MODULE 2: Dual Segment Info Block -->
-                <div class="split-module-grid">
-                    <div class="featured-doc-panel">
-                        <h3 class="section-title" style="font-size:1.2rem; margin-bottom:10px;"><i class="fa-solid fa-clapperboard"></i> Featured Documentary</h3>
-                        <div class="doc-box">
-                            <div class="doc-video-mock">
-<!-- CORE PLATFORM TRACK CONTENT -->
-    <main>
+        <!-- MODULE 4: About Banner -->
+        <section class="section-padding" style="padding-bottom: 60px;">
+            <div class="container">
+                <div class="about-banner" style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 30px; border-radius: 12px; text-align: center;">
+                    <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.4rem; margin-bottom: 10px;">About Islamic Bol Chal</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 700px; margin: 0 auto 20px auto; line-height: 1.6;">Islamic Bol Chal is an effort to spread authentic Islamic knowledge, inspire hearts through the stories of Prophets and Salaf, and help everyone to strengthen their connection with Allah.</p>
+                    <a href="about.html" class="btn btn-outlined" style="padding:8px 20px; font-size:0.85rem; text-decoration: none; color: var(--primary-gold); border: 1px solid var(--primary-gold); border-radius: 4px; display: inline-block;">Read More</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
         <!-- MODULE 1: Dual Segment Info Block (AB LATEST VIDEOS SE PEHLE AYEGA) -->
         <section class="section-padding" style="padding-top: 40px; padding-bottom: 20px;">
