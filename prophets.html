@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stories of the Prophets - IBC</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-darker: #050608;
+            --bg-dark: #0b0d12;
+            --bg-card: #0e1118;
+            --primary-gold: #d4af37;
+            --text-white: #ffffff;
+            --text-muted: #8fa0b5;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --font-heading: 'Poppins', sans-serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-darker);
+            color: var(--text-white);
+            font-family: var(--font-sans);
+            padding-top: 90px;
+        }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+        /* Navbar Style */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(5, 6, 8, 0.8); backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-color);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .logo-text { font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; color: #fff; text-decoration: none; }
+        .logo-text span { color: var(--primary-gold); }
+        .nav-links { display: flex; gap: 24px; list-style: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a.active, .nav-links a:hover { color: var(--primary-gold); }
+
+        /* Page Header */
+        .page-header { text-align: center; padding: 50px 0 30px; }
+        .page-header h1 { font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
+        .page-header h1 span { color: var(--primary-gold); }
+        .page-header p { color: var(--text-muted); font-size: 1rem; letter-spacing: 0.5px; }
+
+        /* Grid Layout */
+        .prophets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding-bottom: 60px;
+            margin-top: 20px;
+        }
+
+        /* Card Style */
+        .prophet-card {
+            background: linear-gradient(145deg, #0e1118 0%, #07090d 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+        }
+        .prophet-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        /* Image/Thumbnail Wrapper */
+        .thumb-wrap {
+            position: relative;
+            height: 160px;
+            background: #121620;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .thumb-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            transition: opacity 0.3s;
+        }
+        .prophet-card:hover .thumb-wrap img {
+            opacity: 0.4;
+        }
+
+        /* Badge/Ribbon */
+        .status-badge {
+            position: absolute;
+            top: 12px; right: 12px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-live { background: rgba(46, 213, 115, 0.15); color: #2ed573; border: 1px solid rgba(46, 213, 115, 0.2); }
+        .badge-teaser { background: rgba(212, 175, 55, 0.15); color: var(--primary-gold); border: 1px solid rgba(212, 175, 55, 0.2); }
+        .badge-soon { background: rgba(255, 255, 255, 0.05); color: var(--text-muted); }
+
+        /* Card Content */
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .card-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        .card-content .sub-title {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* Button Group */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+        .btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        /* Active Buttons */
+        .btn-watch { background: var(--primary-gold); color: #000; font-weight: 600; border: none; }
+        .btn-watch:hover { background: #f0c947; }
+        .btn-read { background: transparent; color: #fff; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .btn-read:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.3); }
+
+        /* Disabled Buttons (Coming Soon) */
+        .btn-disabled {
+            background: rgba(255, 255, 255, 0.02) !important;
+            color: rgba(255, 255, 255, 0.2) !important;
+            border: 1px solid rgba(255, 255, 255, 0.03) !important;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-text">IBC<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="prophets.html" class="active">Prophets</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <section class="container">
+        <div class="page-header">
+            <h1>Stories of the <span>Prophets</span></h1>
+            <p>Silsila-e-Anbiya Karam ki mukammal tareekh aur sabaq-amooz waqiat</p>
+        </div>
+    </section>
+
+    <!-- PROPHETS GRID SECTION -->
+    <main class="container">
+        <div class="prophets-grid">
+
+            <!-- 1. Hazrat Adam (A.S) -->
+            <div class="prophet-card">
+                <div class="thumb-wrap">
+                    <img src="Image/masjid.png" alt="Hazrat Adam">
+                    <span class="status-badge badge-live">Live</span>
+                </div>
+                <div class="card-content">
+                    <h3>Hazrat Adam (علیہ السلام)</h3>
+                    <p class="sub-title">The First Prophet & Human</p>
+                    <div class="btn-group">
+                        <a href="https://youtu.be/rI8pQoPGV1E?si=CNYQsmpHdlGcW_A8" target="_blank" class="btn btn-watch"><i class="fa-solid fa-play"></i> Watch</a>
+                        <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Coming</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Hazrat Shis (A.S) -->
+            <div class="prophet-card">
+                <div class="thumb-wrap">
+                    <img src="Image/masjid.png" alt="Hazrat Shis">
+                    <span class="status-badge badge-live">Live</span>
+                </div>
+                <div class="card-content">
+                    <h3>Hazrat Shis (علیہ السلام)</h3>
+                    <p class="sub-title">Prophet Sheth</p>
+                    <div class="btn-group">
+                        <a href="https://youtu.be/NTMbx7SzicY?si=hIDRuW6MTw_5xmzP" target="_blank" class="btn btn-watch"><i class="fa-solid fa-play"></i> Watch</a>
+                        <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Coming</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Hazrat Idris (A.S) -->
+            <div class="prophet-card">
+                <div class="thumb-wrap">
+                    <img src="Image/masjid.png" alt="Hazrat Idris">
+                    <span class="status-badge badge-soon">Coming Soon</span>
+                </div>
+                <div class="card-content">
+                    <h3>Hazrat Idris (علیہ السلام)</h3>
+                    <p class="sub-title">Prophet Enoch</p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-disabled"><i class="fa-solid fa-play"></i> Video</a>
+                        <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Story</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Hazrat Nuh (A.S) -->
+            <div class="prophet-card" style="border-color: rgba(212, 175, 55, 0.2);">
+                <div class="thumb-wrap">
+                    <img src="Image/masjid.png" alt="Hazrat Nuh">
+                    <span class="status-badge badge-teaser">Teaser</span>
+                </div>
+                <div class="card-content">
+                    <h3>Hazrat Nuh (علیہ السلام)</h3>
+                    <p class="sub-title">Prophet Noah</p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-disabled"><i class="fa-solid fa-clock"></i> Teaser</a>
+                        <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Story</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GENERATING THE REST OF THE 26 PROPHETS IN LOGICAL TIMELINE ORDER -->
+            <script>
+                const remainingProphets = [
+                    { name: "Hazrat Hud (علیہ السلام)", title: "Prophet Eber" },
+                    { name: "Hazrat Salih (علیہ السلام)", title: "Prophet Salah" },
+                    { name: "Hazrat Ibrahim (علیہ السلام)", title: "Prophet Abraham" },
+                    { name: "Hazrat Lut (علیہ السلام)", title: "Prophet Lot" },
+                    { name: "Hazrat Ismail (علیہ السلام)", title: "Prophet Ishmael" },
+                    { name: "Hazrat Ishaq (علیہ السلام)", title: "Prophet Isaac" },
+                    { name: "Hazrat Yaqub (علیہ السلام)", title: "Prophet Jacob" },
+                    { name: "Hazrat Yusuf (علیہ السلام)", title: "Prophet Joseph" },
+                    { name: "Hazrat Ayyub (علیہ السلام)", title: "Prophet Job" },
+                    { name: "Hazrat Shuayb (علیہ السلام)", title: "Prophet Jethro" },
+                    { name: "Hazrat Musa (علیہ السلام)", title: "Prophet Moses" },
+                    { name: "Hazrat Harun (علیہ السلام)", title: "Prophet Aaron" },
+                    { name: "Hazrat Dhul-Kifl (علیہ السلام)", title: "Prophet Ezekiel" },
+                    { name: "Hazrat Dawud (علیہ السلام)", title: "Prophet David" },
+                    { name: "Hazrat Sulayman (علیہ السلام)", title: "Prophet Solomon" },
+                    { name: "Hazrat Ilyas (علیہ السلام)", title: "Prophet Elijah" },
+                    { name: "Hazrat Al-Yasa (علیہ السلام)", title: "Prophet Elisha" },
+                    { name: "Hazrat Yunus (علیہ السلام)", title: "Prophet Jonah" },
+                    { name: "Hazrat Zakariya (علیہ السلام)", title: "Prophet Zechariah" },
+                    { name: "Hazrat Yahya (علیہ السلام)", title: "Prophet John" },
+                    { name: "Hazrat Isa (علیہ السلام)", title: "Prophet Jesus" },
+                    { name: "Prophet Muhammad ﷺ", title: "The Last Messenger" }
+                ];
+
+                const grid = document.querySelector('.prophets-grid');
+                remainingProphets.forEach(p => {
+                    grid.innerHTML += `
+                        <div class="prophet-card">
+                            <div class="thumb-wrap">
+                                <img src="Image/masjid.png" alt="${p.name}">
+                                <span class="status-badge badge-soon">Coming Soon</span>
+                            </div>
+                            <div class="card-content">
+                                <h3>${p.name}</h3>
+                                <p class="sub-title">${p.title}</p>
+                                <div class="btn-group">
+                                    <a href="#" class="btn btn-disabled"><i class="fa-solid fa-play"></i> Video</a>
+                                    <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Story</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            </script>
+
+        </div>
+    </main>
+
+</body>
+</html>
