@@ -114,7 +114,9 @@
 
         /* Result View */
         .result-view { text-align: center; display: none; padding: 20px 0; }
-        .result-icon { font-size: 4rem; color: var(--primary-gold); margin-bottom: 20px; }
+        .result-icon { font-size: 4rem; margin-bottom: 20px; }
+        .result-icon.success-icon { color: var(--success-color); }
+        .result-icon.fail-icon { color: var(--error-color); }
         .result-title { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 10px; }
         .score-text { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px; }
         .score-text span { color: var(--primary-gold); font-weight: 600; font-size: 1.3rem; }
@@ -144,7 +146,7 @@
             
             <div id="quiz-active">
                 <div class="progress-container"><div class="progress-bar" id="progress"></div></div>
-                <div class="question-number" id="q-count">Question 1 of 3</div>
+                <div class="question-number" id="q-count">Question 1 of 5</div>
                 <div class="question-text" id="q-text">Loading question...</div>
                 
                 <div class="options-list" id="options-container">
@@ -156,8 +158,8 @@
             </div>
 
             <div id="quiz-result" class="result-view">
-                <div class="result-icon"><i class="fa-solid fa-award"></i></div>
-                <div class="result-title">Mashallah!</div>
+                <div id="result-status-icon" class="result-icon"></div>
+                <div id="result-status-title" class="result-title">Mashallah!</div>
                 <div class="score-text">Aapne <span id="final-score">0</span> out of <span id="total-score">0</span> sawalat ke sahi jawab diye hain.</div>
                 <button class="restart-btn" onclick="resetQuiz()"><i class="fa-solid fa-rotate-right"></i> Play Again</button>
             </div>
@@ -166,25 +168,36 @@
     </main>
 
     <script>
-        // Sample Questions Set (Aap inko asani se change ya barha sakte hain)
-        const quizData = [
+        // Master Question Repository
+        const masterQuestions = [
             {
                 question: "Allah Ta'ala ne sabsay pehle kis Insan aur Nabi ko paida farmaya?",
                 options: ["Hazrat Nuh (A.S)", "Hazrat Adam (علیہ السلام)", "Hazrat Ibrahim (A.S)", "Hazrat Shis (A.S)"],
-                correct: 1 // Hazrat Adam (index 1)
+                correct: 1
             },
             {
                 question: "Hazrat Adam (A.S) ke baad silsila-e-anbiya mein doosre Nabi kaun thay?",
                 options: ["Hazrat Idris (A.S)", "Hazrat Nuh (A.S)", "Hazrat Shis (علیہ السلام)", "Hazrat Hud (A.S)"],
-                correct: 2 // Hazrat Shis (index 2)
+                correct: 2
             },
             {
                 question: "Kashti-e-Nuh (Noah's Ark) ka waqia kis Nabi ki qoum se talluq rakhta hai?",
                 options: ["Hazrat Nuh (علیہ السلام)", "Hazrat Salih (A.S)", "Hazrat Lut (A.S)", "Hazrat Yusuf (A.S)"],
-                correct: 0 // Hazrat Nuh (index 0)
+                correct: 0
+            },
+            {
+                question: "Quran-e-Kareem ki sabsay pehli wahi kis ghaar (cave) mein nazil hui?",
+                options: ["Ghaar-e-Soor", "Ghaar-e-Hira", "Ghaar-e-Khaf", "Ghaar-e-Sina"],
+                correct: 1
+            },
+            {
+                question: "Khatam-un-Nabiyyin Hazrat Muhammad ﷺ ke sabsay pehle chacha kaun thay jinhone Islam qubool kiya?",
+                options: ["Hazrat Abu Talib", "Hazrat Hamza (R.A)", "Hazrat Abbas (R.A)", "Abu Lahab"],
+                correct: 1
             }
         ];
 
+        let quizQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
 
@@ -197,23 +210,38 @@
         const quizResultScreen = document.getElementById('quiz-result');
         const finalScore = document.getElementById('final-score');
         const totalScore = document.getElementById('total-score');
+        const resultIcon = document.getElementById('result-status-icon');
+        const resultTitle = document.getElementById('result-status-title');
+
+        // Function to shuffle questions arrays randomly
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            // Clone or shuffle list taake master array kharab na ho aur order random ho jaye
+            quizQuestions = shuffleArray([...masterQuestions]);
+            currentQuestionIndex = 0;
+            score = 0;
+            loadQuestion();
+        }
 
         function loadQuestion() {
             nextBtn.style.display = "none";
-            const currentQuestion = quizData[currentQuestionIndex];
+            const currentQuestion = quizQuestions[currentQuestionIndex];
             
-            // Set question texts
-            qCount.innerText = `Sawal ${currentQuestionIndex + 1} of ${quizData.length}`;
+            qCount.innerText = `Sawal ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
             qText.innerText = currentQuestion.question;
             
-            // Progress Bar render
-            const progressPercent = ((currentQuestionIndex) / quizData.length) * 100;
+            const progressPercent = (currentQuestionIndex / quizQuestions.length) * 100;
             progressBar.style.width = `${progressPercent}%`;
 
-            // Clear previous options
             optionsContainer.innerHTML = "";
 
-            // Render new option buttons
             currentQuestion.options.forEach((option, index) => {
                 const button = document.createElement('button');
                 button.classList.add('option-btn');
@@ -224,10 +252,9 @@
         }
 
         function selectOption(selectedIndex, selectedBtn) {
-            const currentQuestion = quizData[currentQuestionIndex];
+            const currentQuestion = quizQuestions[currentQuestionIndex];
             const allButtons = optionsContainer.querySelectorAll('.option-btn');
 
-            // Disable all options once an option is selected
             allButtons.forEach(btn => btn.classList.add('disabled'));
 
             if (selectedIndex === currentQuestion.correct) {
@@ -237,7 +264,8 @@
             } else {
                 selectedBtn.classList.add('wrong');
                 selectedBtn.querySelector('i').className = "fa-solid fa-circle-xmark";
-                // Show right answer instantly to educate user
+                
+                // Expose Right Answer
                 allButtons[currentQuestion.correct].classList.add('correct');
                 allButtons[currentQuestion.correct].querySelector('i').className = "fa-solid fa-circle-check";
             }
@@ -247,7 +275,7 @@
 
         function nextQuestion() {
             currentQuestionIndex++;
-            if (currentQuestionIndex < quizData.length) {
+            if (currentQuestionIndex < quizQuestions.length) {
                 loadQuestion();
             } else {
                 showResults();
@@ -258,20 +286,36 @@
             progressBar.style.width = "100%";
             quizActiveScreen.style.display = "none";
             quizResultScreen.style.display = "block";
+            
             finalScore.innerText = score;
-            totalScore.innerText = quizData.length;
+            totalScore.innerText = quizQuestions.length;
+
+            // DYNAMIC FEEDBACK ENGINE
+            const percentage = (score / quizQuestions.length) * 100;
+            
+            if (percentage >= 80) {
+                resultIcon.className = "result-icon success-icon";
+                resultIcon.innerHTML = `<i class="fa-solid fa-award"></i>`;
+                resultTitle.innerText = "Mashallah! 🎉";
+            } else if (percentage >= 50) {
+                resultIcon.className = "result-icon success-icon";
+                resultIcon.innerHTML = `<i class="fa-solid fa-star"></i>`;
+                resultTitle.innerText = "Zabardast! 🌟";
+            } else {
+                resultIcon.className = "result-icon fail-icon";
+                resultIcon.innerHTML = `<i class="fa-solid fa-book-open"></i>`;
+                resultTitle.innerText = "Koshish Karein! 📚";
+            }
         }
 
         function resetQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
             quizResultScreen.style.display = "none";
             quizActiveScreen.style.display = "block";
-            loadQuestion();
+            initQuiz(); // Dobara shuffle karke game reset karega
         }
 
-        // Initialize quiz on render
-        loadQuestion();
+        // Trigger on load
+        initQuiz();
     </script>
 
 </body>
