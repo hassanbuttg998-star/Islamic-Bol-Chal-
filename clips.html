@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamic Clips & Shorts - IBC</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-darker: #050608;
+            --bg-dark: #0b0d12;
+            --bg-card: #0e1118;
+            --primary-gold: #d4af37;
+            --text-white: #ffffff;
+            --text-muted: #8fa0b5;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --font-heading: 'Poppins', sans-serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-darker);
+            color: var(--text-white);
+            font-family: var(--font-sans);
+            padding-top: 90px;
+        }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+        /* Navbar Style */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(5, 6, 8, 0.8); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .logo-text { font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; color: #fff; text-decoration: none; }
+        .logo-text span { color: var(--primary-gold); }
+        .nav-links { display: flex; gap: 24px; list-style: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a.active, .nav-links a:hover { color: var(--primary-gold); }
+
+        /* Page Header */
+        .page-header { text-align: center; padding: 50px 0 30px; }
+        .page-header h1 { font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
+        .page-header h1 span { color: var(--primary-gold); }
+        .page-header p { color: var(--text-muted); font-size: 1rem; letter-spacing: 0.5px; }
+
+        /* Vertical Clips Grid (9:16 Ratio) */
+        .clips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+            padding-bottom: 60px;
+            margin-top: 20px;
+        }
+
+        /* Clip Card Style */
+        .clip-card {
+            background: linear-gradient(145deg, #0e1118 0%, #07090d 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .clip-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        /* 9:16 Portrait Thumbnail Wrapper */
+        .clip-thumb-wrap {
+            position: relative;
+            width: 100%;
+            padding-top: 160%; /* This forces 9:16 aspect ratio */
+            background: #121620;
+            overflow: hidden;
+        }
+        .clip-thumb-wrap img {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            transition: all 0.3s ease;
+        }
+        .clip-card:hover .clip-thumb-wrap img {
+            opacity: 0.6;
+            transform: scale(1.02);
+        }
+
+        /* Play Icon Overlay */
+        .play-overlay {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px; height: 50px;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--primary-gold);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary-gold); font-size: 1.2rem;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        .clip-card:hover .play-overlay {
+            background: var(--primary-gold);
+            color: #000;
+            box-shadow: 0 0 15px var(--primary-gold);
+        }
+
+        /* Status Badge */
+        .clip-badge {
+            position: absolute; top: 15px; left: 15px;
+            background: rgba(255, 255, 255, 0.05); color: var(--text-muted);
+            font-size: 0.7rem; padding: 4px 10px; border-radius: 50px; font-weight: 500;
+            z-index: 2;
+        }
+
+        /* Clip Info Footer */
+        .clip-info {
+            padding: 15px 18px;
+            background: rgba(14, 17, 24, 0.5);
+        }
+        .clip-info h3 {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #fff;
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis; /* Text truncate karega agar lamba ho */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-text">IBC<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="prophets.html">Prophets</a></li>
+                <li><a href="duas.html">Duas</a></li>
+                <li><a href="quiz.html">Quiz</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a href="clips.html" class="active">Clips</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="page-header">
+            <h1>Islamic <span>Clips</span> & Shorts</h1>
+            <p>Kam waqt mein bhtreen ilm — Deeni short videos aur sabaq-amooz waqiat</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="clips-grid">
+
+            <a href="#" class="clip-card">
+                <div class="clip-thumb-wrap">
+                    <span class="clip-badge">Coming Soon</span>
+                    <img src="Image/masjid.png" alt="Clip Thumbnail">
+                    <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                </div>
+                <div class="clip-info">
+                    <h3>Hazrat Adam (A.S) Ki Paidaish Ka Waqia</h3>
+                </div>
+            </a>
+
+            <a href="#" class="clip-card">
+                <div class="clip-thumb-wrap">
+                    <span class="clip-badge">Coming Soon</span>
+                    <img src="Image/masjid.png" alt="Clip Thumbnail">
+                    <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                </div>
+                <div class="clip-info">
+                    <h3>Dua Qubool Hone Ka Sabsay Behtreen Waqt</h3>
+                </div>
+            </a>
+
+            <a href="#" class="clip-card">
+                <div class="clip-thumb-wrap">
+                    <span class="clip-badge">Coming Soon</span>
+                    <img src="Image/masjid.png" alt="Clip Thumbnail">
+                    <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                </div>
+                <div class="clip-info">
+                    <h3>Kashti-e-Nuh Kitni Barri Thi?</h3>
+                </div>
+            </a>
+
+            <a href="#" class="clip-card">
+                <div class="clip-thumb-wrap">
+                    <span class="clip-badge">Coming Soon</span>
+                    <img src="Image/masjid.png" alt="Clip Thumbnail">
+                    <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                </div>
+                <div class="clip-info">
+                    <h3>Subah Ke Azkar Ki Fazeelat aur Barkat</h3>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+</body>
+</html>
