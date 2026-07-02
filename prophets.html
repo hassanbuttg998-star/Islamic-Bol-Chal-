@@ -94,6 +94,10 @@
             opacity: 0.25;
             transition: opacity 0.3s;
         }
+        /* Live videos ke thumbnails ko bilkul clear dikhane ke liye */
+.thumb-wrap.live-thumb img {
+    opacity: 1 !important;
+}
         .prophet-card:hover .thumb-wrap img {
             opacity: 0.4;
         }
@@ -194,118 +198,112 @@
     <main class="container">
         <div class="prophets-grid">
 
-            <!-- 1. Hazrat Adam (A.S) -->
-            <div class="prophet-card">
-                <div class="thumb-wrap">
-                    <img src="Image/Adam.png" alt="Hazrat Adam">
-                    <span class="status-badge badge-live">Live</span>
-                </div>
-                <div class="card-content">
-                    <h3>Hazrat Adam (علیہ السلام)</h3>
-                    <p class="sub-title">The First Prophet & Human</p>
-                    <div class="btn-group">
-                        <a href="https://youtu.be/rI8pQoPGV1E?si=CNYQsmpHdlGcW_A8" target="_blank" class="btn btn-watch"><i class="fa-solid fa-play"></i> Watch</a>
-                        <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Coming</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. Hazrat Shis (A.S) -->
-            <div class="prophet-card">
-                <div class="thumb-wrap">
-                    <img src="Image/Shis.png" alt="Hazrat Shis">
-                    <span class="status-badge badge-live">Live</span>
-                </div>
-                <div class="card-content">
-                    <h3>Hazrat Shis (علیہ السلام)</h3>
-                    <p class="sub-title">Prophet Sheth</p>
-                    <div class="btn-group">
-                        <a href="https://youtu.be/NTMbx7SzicY?si=hIDRuW6MTw_5xmzP" target="_blank" class="btn btn-watch"><i class="fa-solid fa-play"></i> Watch</a>
-                        <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Coming</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. Hazrat Idris (A.S) -->
-           <!-- 3. Hazrat Idris (A.S) - Updated to Live -->
+          <!-- 1. Hazrat Adam (A.S) -->
 <div class="prophet-card">
-    <div class="thumb-wrap">
-        <img src="Image/Idris.jpg" alt="Hazrat Idris">
+    <div class="thumb-wrap live-thumb">
+        <img src="Image/Adam.png" alt="Hazrat Adam">
         <span class="status-badge badge-live">Live</span>
     </div>
     <div class="card-content">
-        <h3>Hazrat Idris (علیہ السلام)</h3>
-        <p class="sub-title">Prophet Enoch</p>
+        <h3>Hazrat Adam (علیہ السلام)</h3>
         <div class="btn-group">
-            <a href="https://youtu.be/CSS8QKG49lg?si=u24quSR9_d7RStzn" target="_blank" class="btn btn-watch"><i class="fa-solid fa-play"></i> Watch</a>
+            <a href="https://youtu.be/rI8pQoPGV1E?si=34QHfct5eq5BDTuA" target="_blank" class="btn btn-watch"><i class="fa-solid fa-play"></i> Watch</a>
             <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Coming</a>
         </div>
     </div>
 </div>
 
-            <!-- 4. Hazrat Nuh (A.S) -->
-            <div class="prophet-card" style="border-color: rgba(212, 175, 55, 0.2);">
+<!-- 2. Hazrat Shis (A.S) -->
+<div class="prophet-card">
+    <div class="thumb-wrap live-thumb">
+        <img src="Image/Shis.png" alt="Hazrat Shis">
+        <span class="status-badge badge-live">Live</span>
+    </div>
+    <div class="card-content">
+        <h3>Hazrat Shis (علیہ السلام)</h3>
+        <div class="btn-group">
+            <a href="https://youtu.be/NTMbx7SzicY?si=Y29NOt2qIO3trkrR" target="_blank" class="btn btn-watch"><i class="fa-solid fa-play"></i> Watch</a>
+            <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Coming</a>
+        </div>
+    </div>
+</div>
+
+<!-- 3. Hazrat Idris (A.S) -->
+<div class="prophet-card">
+    <div class="thumb-wrap live-thumb">
+        <img src="Image/Idrees.png" alt="Hazrat Idris">
+        <span class="status-badge badge-live">Live</span>
+    </div>
+    <div class="card-content">
+        <h3>Hazrat Idris (علیہ السلام)</h3>
+        <div class="btn-group">
+            <a href="https://youtu.be/CSS8QKG49lg?si=0XdPIVj765JwS0if" target="_blank" class="btn btn-watch"><i class="fa-solid fa-play"></i> Watch</a>
+            <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Coming</a>
+        </div>
+    </div>
+</div>
+
+<!-- 4. Hazrat Nuh (A.S) -->
+<div class="prophet-card" style="border-color: rgba(212, 175, 55, 0.2);">
+    <div class="thumb-wrap">
+        <img src="Image/noah.png" alt="Hazrat Nuh">
+        <span class="status-badge badge-teaser">Teaser</span>
+    </div>
+    <div class="card-content">
+        <h3>Hazrat Nuh (علیہ السلام)</h3>
+        <div class="btn-group">
+            <a href="#" class="btn btn-disabled"><i class="fa-solid fa-clock"></i> Teaser</a>
+            <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Story</a>
+        </div>
+    </div>
+</div>
+
+            <!-- GENERATING THE REST OF THE 26 PROPHETS IN LOGICAL TIMELINE ORDER -->
+           <script>
+    const remainingProphets = [
+        "Hazrat Hud (علیہ السلام)",
+        "Hazrat Salih (علیہ السلام)",
+        "Hazrat Ibrahim (علیہ السلام)",
+        "Hazrat Lut (علیہ السلام)",
+        "Hazrat Ismail (علیہ السلام)",
+        "Hazrat Ishaq (علیہ السلام)",
+        "Hazrat Yaqub (علیہ السلام)",
+        "Hazrat Yusuf (علیہ السلام)",
+        "Hazrat  Ayyub (علیہ السلام)",
+        "Hazrat Shuayb (علیہ السلام)",
+        "Hazrat Musa (علیہ السلام)",
+        "Hazrat Harun (علیہ السلام)",
+        "Hazrat Dhul-Kifl (علیہ السلام)",
+        "Hazrat Dawud (علیہ السلام)",
+        "Hazrat Sulayman (علیہ السلام)",
+        "Hazrat Ilyas (علیہ السلام)",
+        "Hazrat Al-Yasa (علیہ السلام)",
+        "Hazrat Yunus (علیہ السلام)",
+        "Hazrat Zakariya (علیہ السلام)",
+        "Hazrat Yahya (علیہ السلام)",
+        "Hazrat Isa (علیہ السلام)",
+        "Prophet Muhammad ﷺ"
+    ];
+
+    const grid = document.querySelector('.prophets-grid');
+    remainingProphets.forEach(name => {
+        grid.innerHTML += `
+            <div class="prophet-card">
                 <div class="thumb-wrap">
-                    <img src="Image/nuah.png" alt="Hazrat Nuh">
-                    <span class="status-badge badge-teaser">Teaser</span>
+                    <img src="Image/masjid.png" alt="${name}">
+                    <span class="status-badge badge-soon">Coming Soon</span>
                 </div>
                 <div class="card-content">
-                    <h3>Hazrat Nuh (علیہ السلام)</h3>
-                    <p class="sub-title">Prophet Noah</p>
+                    <h3>${name}</h3>
                     <div class="btn-group">
-                        <a href="#" class="btn btn-disabled"><i class="fa-solid fa-clock"></i> Teaser</a>
+                        <a href="#" class="btn btn-disabled"><i class="fa-solid fa-play"></i> Video</a>
                         <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Story</a>
                     </div>
                 </div>
             </div>
-
-            <!-- GENERATING THE REST OF THE 26 PROPHETS IN LOGICAL TIMELINE ORDER -->
-            <script>
-                const remainingProphets = [
-                    { name: "Hazrat Hud (علیہ السلام)", title: "Prophet Eber" },
-                    { name: "Hazrat Salih (علیہ السلام)", title: "Prophet Salah" },
-                    { name: "Hazrat Ibrahim (علیہ السلام)", title: "Prophet Abraham" },
-                    { name: "Hazrat Lut (علیہ السلام)", title: "Prophet Lot" },
-                    { name: "Hazrat Ismail (علیہ السلام)", title: "Prophet Ishmael" },
-                    { name: "Hazrat Ishaq (علیہ السلام)", title: "Prophet Isaac" },
-                    { name: "Hazrat Yaqub (علیہ السلام)", title: "Prophet Jacob" },
-                    { name: "Hazrat Yusuf (علیہ السلام)", title: "Prophet Joseph" },
-                    { name: "Hazrat Ayyub (علیہ السلام)", title: "Prophet Job" },
-                    { name: "Hazrat Shuayb (علیہ السلام)", title: "Prophet Jethro" },
-                    { name: "Hazrat Musa (علیہ السلام)", title: "Prophet Moses" },
-                    { name: "Hazrat Harun (علیہ السلام)", title: "Prophet Aaron" },
-                    { name: "Hazrat Dhul-Kifl (علیہ السلام)", title: "Prophet Ezekiel" },
-                    { name: "Hazrat Dawud (علیہ السلام)", title: "Prophet David" },
-                    { name: "Hazrat Sulayman (علیہ السلام)", title: "Prophet Solomon" },
-                    { name: "Hazrat Ilyas (علیہ السلام)", title: "Prophet Elijah" },
-                    { name: "Hazrat Al-Yasa (علیہ السلام)", title: "Prophet Elisha" },
-                    { name: "Hazrat Yunus (علیہ السلام)", title: "Prophet Jonah" },
-                    { name: "Hazrat Zakariya (علیہ السلام)", title: "Prophet Zechariah" },
-                    { name: "Hazrat Yahya (علیہ السلام)", title: "Prophet John" },
-                    { name: "Hazrat Isa (علیہ السلام)", title: "Prophet Jesus" },
-                    { name: "Prophet Muhammad ﷺ", title: "The Last Messenger" }
-                ];
-
-                const grid = document.querySelector('.prophets-grid');
-                remainingProphets.forEach(p => {
-                    grid.innerHTML += `
-                        <div class="prophet-card">
-                            <div class="thumb-wrap">
-                                <img src="Image/masjid.png" alt="${p.name}">
-                                <span class="status-badge badge-soon">Coming Soon</span>
-                            </div>
-                            <div class="card-content">
-                                <h3>${p.name}</h3>
-                                <p class="sub-title">${p.title}</p>
-                                <div class="btn-group">
-                                    <a href="#" class="btn btn-disabled"><i class="fa-solid fa-play"></i> Video</a>
-                                    <a href="#" class="btn btn-disabled"><i class="fa-solid fa-book-open"></i> Story</a>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-            </script>
+        `;
+    });
+</script>
 
         </div>
     </main>
