@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duas & Azkar Library - IBC</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-darker: #050608;
+            --bg-dark: #0b0d12;
+            --bg-card: #0e1118;
+            --primary-gold: #d4af37;
+            --text-white: #ffffff;
+            --text-muted: #8fa0b5;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --font-heading: 'Poppins', sans-serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-darker);
+            color: var(--text-white);
+            font-family: var(--font-sans);
+            padding-top: 90px;
+        }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+        /* Navbar Style */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(5, 6, 8, 0.8); backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-color);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .logo-text { font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; color: #fff; text-decoration: none; }
+        .logo-text span { color: var(--primary-gold); }
+        .nav-links { display: flex; gap: 24px; list-style: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a.active, .nav-links a:hover { color: var(--primary-gold); }
+
+        /* Page Header */
+        .page-header { text-align: center; padding: 50px 0 30px; }
+        .page-header h1 { font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
+        .page-header h1 span { color: var(--primary-gold); }
+        .page-header p { color: var(--text-muted); font-size: 1rem; letter-spacing: 0.5px; }
+
+        /* Grid Layout */
+        .azkar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            padding-bottom: 60px;
+            margin-top: 20px;
+        }
+
+        /* Dua Card Style */
+        .dua-card {
+            background: linear-gradient(145deg, #0e1118 0%, #07090d 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            text-decoration: none;
+            color: inherit;
+        }
+        .dua-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Icon wrapper */
+        .dua-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(212, 175, 55, 0.08);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-gold);
+            font-size: 1.4rem;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .dua-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            color: #fff;
+            font-weight: 600;
+        }
+        .dua-card p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        /* Badge for coming soon or total duas */
+        .dua-badge {
+            position: absolute;
+            top: 25px; right: 25px;
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-text">IBC<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="prophets.html">Prophets</a></li>
+                <li><a href="duas.html" class="active">Duas</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <section class="container">
+        <div class="page-header">
+            <h1>Duas & <span>Azkar</span> Library</h1>
+            <p>Quran o Sahih Hadees se sabit shuda rozmarrah ki duain aur azkar</p>
+        </div>
+    </section>
+
+    <!-- DUAS GRID SECTION -->
+    <main class="container">
+        <div class="azkar-grid">
+
+            <!-- Card 1 -->
+            <a href="#" class="dua-card">
+                <span class="dua-badge">Coming Soon</span>
+                <div class="dua-icon"><i class="fa-solid fa-cloud-sun"></i></div>
+                <h3>Subah o Sham ke Azkar</h3>
+                <p>Din ke shuruat aur ikhtitam par parhi jaane wali hifazat aur barkat ki duain.</p>
+            </a>
+
+            <!-- Card 2 -->
+            <a href="#" class="dua-card">
+                <span class="dua-badge">Coming Soon</span>
+                <div class="dua-icon"><i class="fa-solid fa-mosque"></i></div>
+                <h3>Namaz ke Baad ke Azkar</h3>
+                <p>Farz namazon ke salam pherne ke baad ki masnoon duain aur tasbeehat.</p>
+            </a>
+
+            <!-- Card 3 -->
+            <a href="#" class="dua-card">
+                <span class="dua-badge">Coming Soon</span>
+                <div class="dua-icon"><i class="fa-solid fa-moon"></i></div>
+                <h3>Sone aur Jagne ki Duain</h3>
+                <p>Raat ko sote waqt buray khwabon se hifazat aur subah bedar hone ke azkar.</p>
+            </a>
+
+            <!-- Card 4 -->
+            <a href="#" class="dua-card">
+                <span class="dua-badge">Coming Soon</span>
+                <div class="dua-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Shifa aur Hifazat ki Duain</h3>
+                <p>Bimariyon, nazar-e-bad, aur har qism ke shar se bachao ki makhsoos duain.</p>
+            </a>
+
+            <!-- Card 5 -->
+            <a href="#" class="dua-card">
+                <span class="dua-badge">Coming Soon</span>
+                <div class="dua-icon"><i class="fa-solid fa-coins"></i></div>
+                <h3>Rizq mein Barkat ki Duain</h3>
+                <p>Tangi o mohtaji se nijat aur halal rizq mein izafe ke liye makhsoos masnoon azkar.</p>
+            </a>
+
+            <!-- Card 6 -->
+            <a href="#" class="dua-card">
+                <span class="dua-badge">Coming Soon</span>
+                <div class="dua-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h3>Mushkil o Pareshani ki Duain</h3>
+                <p>Gham, fikar, qarz aur achanak aane wali aazmaishon ke waqt parhi jaane wali duain.</p>
+            </a>
+
+        </div>
+    </main>
+
+</body>
+</html>
