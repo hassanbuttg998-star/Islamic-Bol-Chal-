@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamic Quiz Challenge - IBC</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-darker: #050608;
+            --bg-dark: #0b0d12;
+            --bg-card: #0e1118;
+            --primary-gold: #d4af37;
+            --text-white: #ffffff;
+            --text-muted: #8fa0b5;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --success-color: #2ed573;
+            --error-color: #ff4757;
+            --font-heading: 'Poppins', sans-serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-darker);
+            color: var(--text-white);
+            font-family: var(--font-sans);
+            padding-top: 90px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container { width: 90%; max-width: 800px; margin: 0 auto; flex-grow: 1; display: flex; flex-direction: column; justify-content: center;}
+
+        /* Navbar Style */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(5, 6, 8, 0.8); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; max-width: 1200px; }
+        .logo-text { font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; color: #fff; text-decoration: none; }
+        .logo-text span { color: var(--primary-gold); }
+        .nav-links { display: flex; gap: 24px; list-style: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a.active, .nav-links a:hover { color: var(--primary-gold); }
+
+        /* Quiz Box Container */
+        .quiz-box {
+            background: linear-gradient(145deg, #0e1118 0%, #07090d 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+            margin: 40px 0;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%; height: 6px; background: rgba(255,255,255,0.05);
+            border-radius: 10px; margin-bottom: 30px; overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%; width: 0%; background: var(--primary-gold);
+            transition: width 0.4s ease;
+        }
+
+        /* Question Text */
+        .question-number { color: var(--primary-gold); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .question-text { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 500; line-height: 1.5; margin-bottom: 30px; }
+
+        /* Options List */
+        .options-list { display: flex; flex-direction: column; gap: 15px; list-style: none; }
+        .option-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px 20px;
+            color: #fff;
+            font-size: 1rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateX(5px);
+        }
+
+        /* Dynamic Feedback States via JS */
+        .option-btn.correct { background: rgba(46, 213, 115, 0.15) !important; border-color: var(--success-color) !important; color: var(--success-color); font-weight: 600; }
+        .option-btn.wrong { background: rgba(255, 71, 87, 0.15) !important; border-color: var(--error-color) !important; color: var(--error-color); }
+        .option-btn.disabled { pointer-events: none; }
+
+        /* Next Button Container */
+        .quiz-footer { display: flex; justify-content: flex-end; margin-top: 30px; min-height: 45px; }
+        .next-btn {
+            background: var(--primary-gold); color: #000; border: none;
+            padding: 12px 30px; font-weight: 600; border-radius: 8px;
+            cursor: pointer; font-size: 0.9rem; display: none; transition: 0.2s;
+        }
+        .next-btn:hover { background: #f0c947; }
+
+        /* Result View */
+        .result-view { text-align: center; display: none; padding: 20px 0; }
+        .result-icon { font-size: 4rem; color: var(--primary-gold); margin-bottom: 20px; }
+        .result-title { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 10px; }
+        .score-text { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px; }
+        .score-text span { color: var(--primary-gold); font-weight: 600; font-size: 1.3rem; }
+        .restart-btn {
+            background: transparent; color: #fff; border: 1px solid var(--primary-gold);
+            padding: 12px 30px; font-weight: 500; border-radius: 8px; cursor: pointer; transition: 0.3s;
+        }
+        .restart-btn:hover { background: var(--primary-gold); color: #000; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo-text">IBC<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="prophets.html">Prophets</a></li>
+                <li><a href="duas.html">Duas</a></li>
+                <li><a href="quiz.html" class="active">Quiz</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="quiz-box">
+            
+            <div id="quiz-active">
+                <div class="progress-container"><div class="progress-bar" id="progress"></div></div>
+                <div class="question-number" id="q-count">Question 1 of 3</div>
+                <div class="question-text" id="q-text">Loading question...</div>
+                
+                <div class="options-list" id="options-container">
+                    </div>
+
+                <div class="quiz-footer">
+                    <button class="next-btn" id="next-button" onclick="nextQuestion()">Next Question <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div id="quiz-result" class="result-view">
+                <div class="result-icon"><i class="fa-solid fa-award"></i></div>
+                <div class="result-title">Mashallah!</div>
+                <div class="score-text">Aapne <span id="final-score">0</span> out of <span id="total-score">0</span> sawalat ke sahi jawab diye hain.</div>
+                <button class="restart-btn" onclick="resetQuiz()"><i class="fa-solid fa-rotate-right"></i> Play Again</button>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // Sample Questions Set (Aap inko asani se change ya barha sakte hain)
+        const quizData = [
+            {
+                question: "Allah Ta'ala ne sabsay pehle kis Insan aur Nabi ko paida farmaya?",
+                options: ["Hazrat Nuh (A.S)", "Hazrat Adam (علیہ السلام)", "Hazrat Ibrahim (A.S)", "Hazrat Shis (A.S)"],
+                correct: 1 // Hazrat Adam (index 1)
+            },
+            {
+                question: "Hazrat Adam (A.S) ke baad silsila-e-anbiya mein doosre Nabi kaun thay?",
+                options: ["Hazrat Idris (A.S)", "Hazrat Nuh (A.S)", "Hazrat Shis (علیہ السلام)", "Hazrat Hud (A.S)"],
+                correct: 2 // Hazrat Shis (index 2)
+            },
+            {
+                question: "Kashti-e-Nuh (Noah's Ark) ka waqia kis Nabi ki qoum se talluq rakhta hai?",
+                options: ["Hazrat Nuh (علیہ السلام)", "Hazrat Salih (A.S)", "Hazrat Lut (A.S)", "Hazrat Yusuf (A.S)"],
+                correct: 0 // Hazrat Nuh (index 0)
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const qText = document.getElementById('q-text');
+        const qCount = document.getElementById('q-count');
+        const optionsContainer = document.getElementById('options-container');
+        const progressBar = document.getElementById('progress');
+        const nextBtn = document.getElementById('next-button');
+        const quizActiveScreen = document.getElementById('quiz-active');
+        const quizResultScreen = document.getElementById('quiz-result');
+        const finalScore = document.getElementById('final-score');
+        const totalScore = document.getElementById('total-score');
+
+        function loadQuestion() {
+            nextBtn.style.display = "none";
+            const currentQuestion = quizData[currentQuestionIndex];
+            
+            // Set question texts
+            qCount.innerText = `Sawal ${currentQuestionIndex + 1} of ${quizData.length}`;
+            qText.innerText = currentQuestion.question;
+            
+            // Progress Bar render
+            const progressPercent = ((currentQuestionIndex) / quizData.length) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+
+            // Clear previous options
+            optionsContainer.innerHTML = "";
+
+            // Render new option buttons
+            currentQuestion.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.classList.add('option-btn');
+                button.innerHTML = `<span>${option}</span> <i class="fa-regular fa-circle"></i>`;
+                button.addEventListener('click', () => selectOption(index, button));
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            const currentQuestion = quizData[currentQuestionIndex];
+            const allButtons = optionsContainer.querySelectorAll('.option-btn');
+
+            // Disable all options once an option is selected
+            allButtons.forEach(btn => btn.classList.add('disabled'));
+
+            if (selectedIndex === currentQuestion.correct) {
+                selectedBtn.classList.add('correct');
+                selectedBtn.querySelector('i').className = "fa-solid fa-circle-check";
+                score++;
+            } else {
+                selectedBtn.classList.add('wrong');
+                selectedBtn.querySelector('i').className = "fa-solid fa-circle-xmark";
+                // Show right answer instantly to educate user
+                allButtons[currentQuestion.correct].classList.add('correct');
+                allButtons[currentQuestion.correct].querySelector('i').className = "fa-solid fa-circle-check";
+            }
+
+            nextBtn.style.display = "block";
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            progressBar.style.width = "100%";
+            quizActiveScreen.style.display = "none";
+            quizResultScreen.style.display = "block";
+            finalScore.innerText = score;
+            totalScore.innerText = quizData.length;
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizResultScreen.style.display = "none";
+            quizActiveScreen.style.display = "block";
+            loadQuestion();
+        }
+
+        // Initialize quiz on render
+        loadQuestion();
+    </script>
+
+</body>
+</html>
