@@ -259,8 +259,6 @@
         let score = 0;
         let timerInterval = null;
         let timeLeft = 15;
-        
-        // Mock dataset placeholder until Serverless AI API is connected
         let generatedQuestions = [];
 
         function showScreen(screenId) {
@@ -279,25 +277,40 @@
             triggerAIEngine();
         }
 
-        function triggerAIEngine() {
+        // REAL BACKEND CALL: Fetching dynamic JSON questions from Gemini API via Vercel
+        async function triggerAIEngine() {
             showScreen('screen-loading');
             
-            // AI API Call simulation (Will replace with Vercel Serverless call next)
-            setTimeout(() => {
-                generateMockQuestions(); 
-                startQuizArena();
-            }, 2000);
-        }
-
-        function generateMockQuestions() {
-            // Temporary setup structure matching your strict requirement
-            generatedQuestions = [];
-            for(let i=1; i<=10; i++) {
-                generatedQuestions.push({
-                    question: `Sample AI Question ${i} for ${currentCategory} (Level ${currentLevel})?`,
-                    options: ["Option A text", "Option B text", "Correct Answer Node", "Option D text"],
-                    correct: "Correct Answer Node"
+            try {
+                const response = await fetch('/api/get-quiz', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        category: currentCategory,
+                        level: currentLevel
+                    })
                 });
+
+                if (!response.ok) {
+                    throw new Error('API server down or Key invalid');
+                }
+
+                generatedQuestions = await response.json();
+                
+                // Safety check: Ensure we got valid questions array
+                if (Array.isArray(generatedQuestions) && generatedQuestions.length > 0) {
+                    startQuizArena();
+                } else {
+                    alert("AI data format error. Please try again!");
+                    showScreen('screen-categories');
+                }
+
+            } catch (error) {
+                console.error("Quiz Error:", error);
+                alert("AI Engine response error. Please try again later!");
+                showScreen('screen-categories');
             }
         }
 
@@ -317,9 +330,14 @@
             document.getElementById('current-q-index').innerText = currentQuestionIndex + 1;
             document.getElementById('arena-question').innerText = q.question;
             
+            // Randomize options shuffle so correct answers aren't in the same position
+            let shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+            
             let optionsHtml = "";
-            q.options.forEach(opt => {
-                optionsHtml += `<div class="option-node" onclick="checkAnswer(this, '${opt}')">${opt}</div>`;
+            shuffledOptions.forEach(opt => {
+                // Sanitizing string inputs to avoid single quote breakages
+                let cleanOpt = opt.replace(/'/g, "\\'");
+                optionsHtml += `<div class="option-node" onclick="checkAnswer(this, '${cleanOpt}')">${opt}</div>`;
             });
             document.getElementById('arena-options').innerHTML = optionsHtml;
             
@@ -335,12 +353,11 @@
 
         function checkAnswer(element, selectedOption) {
             clearInterval(timerInterval);
-            // Disable further option clicks for this question
             document.querySelectorAll('.option-node').forEach(node => node.removeAttribute('onclick'));
             
             let correctAnswer = generatedQuestions[currentQuestionIndex].correct;
             
-            if(selectedOption === correctAnswer) {
+            if(selectedOption.trim() === correctAnswer.trim()) {
                 element.classList.add('correct');
                 element.innerHTML += ' <i class="fa-solid fa-circle-check"></i>';
                 score++;
@@ -348,9 +365,8 @@
                 element.classList.add('incorrect');
                 element.innerHTML += ' <i class="fa-solid fa-circle-xmark"></i>';
                 
-                // Show where the correct answer was
                 document.querySelectorAll('.option-node').forEach(node => {
-                    if(node.innerText.trim() === correctAnswer) {
+                    if(node.innerText.trim() === correctAnswer.trim()) {
                         node.classList.add('correct');
                     }
                 });
@@ -371,7 +387,7 @@
             let correctAnswer = generatedQuestions[currentQuestionIndex].correct;
             
             document.querySelectorAll('.option-node').forEach(node => {
-                if(node.innerText.trim() === correctAnswer) {
+                if(node.innerText.trim() === correctAnswer.trim()) {
                     node.classList.add('correct');
                 }
             });
@@ -403,12 +419,10 @@
         }
 
         function actionPlayAgain() {
-            // Memory trace remains intact, same array loaded again
             startQuizArena();
         }
 
         function actionPlayNew() {
-            // Requests fresh dynamic generation from configuration
             triggerAIEngine();
         }
     </script>
