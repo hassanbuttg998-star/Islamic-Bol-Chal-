@@ -261,6 +261,22 @@
         let timeLeft = 15;
         let generatedQuestions = [];
 
+        // Yeh aapka offline automatic data hai jo kabhi fail nahi hoga
+        const offlineQuizData = {
+            "Seerat-un-Nabi": [
+                { "question": "Our Prophet Muhammad (S.A.W) was born in which city?", "options": ["Makkah", "Madinah", "Taif", "Syria"], "correct": "Makkah" },
+                { "question": "What was the name of Holy Prophet's mother?", "options": ["Hazrat Aminah", "Hazrat Halimah", "Hazrat Khadijah", "Hazrat Aisha"], "correct": "Hazrat Aminah" },
+                { "question": "How old was Prophet Muhammad when his mother passed away?", "options": ["6 Years", "8 Years", "4 Years", "10 Years"], "correct": "6 Years" }
+            ],
+            "Ambiya (Prophets)": [
+                { "question": "Which Prophet was known for his patience (Sabr)?", "options": ["Hazrat Ayyub (A.S)", "Hazrat Musa (A.S)", "Hazrat Isa (A.S)", "Hazrat Yusuf (A.S)"], "correct": "Hazrat Ayyub (A.S)" },
+                { "question": "Which Prophet could speak to animals?", "options": ["Hazrat Sulaiman (A.S)", "Hazrat Dawood (A.S)", "Hazrat Ibrahim (A.S)", "Hazrat Adam (A.S)"], "correct": "Hazrat Sulaiman (A.S)" }
+            ],
+            "Islamic Tareekh": [
+                { "question": "Who was the first Caliph of Islam?", "options": ["Hazrat Abu Bakr (R.A)", "Hazrat Umar (R.A)", "Hazrat Usman (R.A)", "Hazrat Ali (R.A)"], "correct": "Hazrat Abu Bakr (R.A)" }
+            ]
+        };
+
         function showScreen(screenId) {
             document.querySelectorAll('.quiz-screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
@@ -274,44 +290,13 @@
 
         function selectLevel(level) {
             currentLevel = level;
-            triggerAIEngine();
-        }
-
-        // REAL BACKEND CALL: Fetching dynamic JSON questions from Gemini API via Vercel
-        async function triggerAIEngine() {
+            // No API call, direct load from memory
             showScreen('screen-loading');
-            
-            try {
-                const response = await fetch('/api/get-quiz', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        category: currentCategory,
-                        level: currentLevel
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error('API server down or Key invalid');
-                }
-
-                generatedQuestions = await response.json();
-                
-                // Safety check: Ensure we got valid questions array
-                if (Array.isArray(generatedQuestions) && generatedQuestions.length > 0) {
-                    startQuizArena();
-                } else {
-                    alert("AI data format error. Please try again!");
-                    showScreen('screen-categories');
-                }
-
-            } catch (error) {
-                console.error("Quiz Error:", error);
-                alert("AI Engine response error. Please try again later!");
-                showScreen('screen-categories');
-            }
+            setTimeout(() => {
+                let pool = offlineQuizData[currentCategory] || offlineQuizData["Seerat-un-Nabi"];
+                generatedQuestions = pool; 
+                startQuizArena();
+            }, 1000);
         }
 
         function startQuizArena() {
@@ -327,15 +312,13 @@
             document.getElementById('timer-countdown').innerText = timeLeft;
             
             let q = generatedQuestions[currentQuestionIndex];
+            if (!q) { showResults(); return; }
+
             document.getElementById('current-q-index').innerText = currentQuestionIndex + 1;
             document.getElementById('arena-question').innerText = q.question;
             
-            // Randomize options shuffle so correct answers aren't in the same position
-            let shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
-            
             let optionsHtml = "";
-            shuffledOptions.forEach(opt => {
-                // Sanitizing string inputs to avoid single quote breakages
+            q.options.forEach(opt => {
                 let cleanOpt = opt.replace(/'/g, "\\'");
                 optionsHtml += `<div class="option-node" onclick="checkAnswer(this, '${cleanOpt}')">${opt}</div>`;
             });
@@ -359,12 +342,9 @@
             
             if(selectedOption.trim() === correctAnswer.trim()) {
                 element.classList.add('correct');
-                element.innerHTML += ' <i class="fa-solid fa-circle-check"></i>';
                 score++;
             } else {
                 element.classList.add('incorrect');
-                element.innerHTML += ' <i class="fa-solid fa-circle-xmark"></i>';
-                
                 document.querySelectorAll('.option-node').forEach(node => {
                     if(node.innerText.trim() === correctAnswer.trim()) {
                         node.classList.add('correct');
@@ -374,7 +354,7 @@
 
             setTimeout(() => {
                 currentQuestionIndex++;
-                if(currentQuestionIndex < 10) {
+                if(currentQuestionIndex < generatedQuestions.length) {
                     loadQuestion();
                 } else {
                     showResults();
@@ -385,7 +365,6 @@
         function handleTimeout() {
             document.querySelectorAll('.option-node').forEach(node => node.removeAttribute('onclick'));
             let correctAnswer = generatedQuestions[currentQuestionIndex].correct;
-            
             document.querySelectorAll('.option-node').forEach(node => {
                 if(node.innerText.trim() === correctAnswer.trim()) {
                     node.classList.add('correct');
@@ -394,7 +373,7 @@
 
             setTimeout(() => {
                 currentQuestionIndex++;
-                if(currentQuestionIndex < 10) {
+                if(currentQuestionIndex < generatedQuestions.length) {
                     loadQuestion();
                 } else {
                     showResults();
@@ -404,27 +383,17 @@
 
         function showResults() {
             showScreen('screen-result');
-            document.getElementById('result-score-val').innerText = `${score}/10`;
-            
-            let iconBox = document.getElementById('result-icon');
+            document.getElementById('result-score-val').innerText = `${score}/${generatedQuestions.length}`;
             let titleBox = document.getElementById('result-title');
-            
-            if(score >= 6) {
-                iconBox.innerHTML = '<i class="fa-solid fa-award"></i>';
+            if(score >= 2) {
                 titleBox.innerHTML = 'Mashallah <span style="color:var(--primary-gold);">Zabardast!</span>';
             } else {
-                iconBox.innerHTML = '<i class="fa-solid fa-heart-crack" style="color:var(--error-red);"></i>';
                 titleBox.innerHTML = 'Dobara Koshish <span style="color:var(--text-muted);">Karein!</span>';
             }
         }
 
-        function actionPlayAgain() {
-            startQuizArena();
-        }
-
-        function actionPlayNew() {
-            triggerAIEngine();
-        }
+        function actionPlayAgain() { startQuizArena(); }
+        function actionPlayNew() { showScreen('screen-categories'); }
     </script>
 </body>
 </html>
