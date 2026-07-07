@@ -824,7 +824,7 @@
             "nav_prophets": "انبیاء",
             "hero_welcome": "خوش آمدید",
             "hero_title": "اسلامک بول چال",
-            "hero_desc": "کہانیوں، علم اور غور و فکر کے ذریعے islam کو دریافت کریں۔"
+            "hero_desc": "کہانیوں، علم اور غور و فکر کے ذریعے اسلام کو دریافت کریں۔"
         }
     };
 
@@ -854,6 +854,11 @@
             const modal = document.getElementById('screen-language');
             if (modal) modal.style.display = 'none';
         }, 500);
+    }
+
+    // Isko backup ke liye rakh rahe hain agar kahin purana naam use ho raha ho
+    function selectLanguage(lang) {
+        setGlobalLanguage(lang);
     }
 
     // 4. MAIN INTERFACE TRANSFORMATION ENGINE
@@ -887,6 +892,7 @@
         localStorage.removeItem('user-language'); // Memory clear
         location.reload(); // Page reload hote hi dobara modal khul jayega
     }
+</script>
 </script>
 </body>
 </html>
