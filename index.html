@@ -823,6 +823,93 @@
             const modal = document.getElementById("languageModal");
             modal.classList.add("show");
         }
+
+        <script>
+    // 1. POORI WEBSITE KA TRANSLATION DATA
+    const globalTranslations = {
+        "en": {
+            "lang_title": "Choose Your Language",
+            "lang_footer": "Your choices are secure & saved",
+            "nav_home": "Home",
+            "nav_videos": "Videos",
+            "nav_quiz": "Quiz",
+            "nav_prophets": "Prophets",
+            "hero_welcome": "WELCOME TO",
+            "hero_title": "Islamic Bol Chal",
+            "hero_desc": "Discover Islam Through Stories, Knowledge & Reflection"
+        },
+        "ur": {
+            "lang_title": "اپنی زبان منتخب کریں",
+            "lang_footer": "آپ کے انتخاب محفوظ ہیں",
+            "nav_home": "ہوم",
+            "nav_videos": "ویڈیوز",
+            "nav_quiz": "کوئز",
+            "nav_prophets": "انبیاء",
+            "hero_welcome": "خوش آمدید",
+            "hero_title": "اسلامک بول چال",
+            "hero_desc": "کہانیوں، علم اور غور و فکر کے ذریعے اسلام کو دریافت کریں۔"
+        }
+    };
+
+    // 2. AUTO INITIALIZER: Jab bhi page load hoga, check karega memory
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedLanguage = localStorage.getItem('user-language');
+        const modal = document.getElementById('screen-language');
+
+        if (savedLanguage) {
+            // Agar language pehle se saved hai, toh direct translate karo aur modal chupa do
+            applyLanguageSettings(savedLanguage);
+            if (modal) modal.style.display = 'none';
+        } else {
+            // Naya user hai toh modal samne dikhao
+            if (modal) modal.style.display = 'flex';
+            applyLanguageSettings('en'); // Default initial display
+        }
+    });
+
+    // 3. SELECTION CONTROLLER: Jab user Urdu ya English button dabaye
+    function setGlobalLanguage(lang) {
+        localStorage.setItem('user-language', lang); // Browser database me save kar diya
+        applyLanguageSettings(lang);
+
+        // Ek smooth close transition
+        setTimeout(() => {
+            const modal = document.getElementById('screen-language');
+            if (modal) modal.style.display = 'none';
+        }, 500);
+    }
+
+    // 4. MAIN INTERFACE TRANSFORMATION ENGINE
+    function applyLanguageSettings(lang) {
+        // Modal ka text update karna
+        const mainTitle = document.getElementById('lang-main-title');
+        const footerText = document.getElementById('lang-footer-text');
+        if (mainTitle) mainTitle.innerText = globalTranslations[lang]["lang_title"];
+        if (footerText) footerText.innerHTML = `<i class="fa-solid fa-lock" style="font-size:0.65rem;"></i> ${globalTranslations[lang]["lang_footer"]}`;
+
+        // Language Direction Setup (RTL for Urdu)
+        if (lang === 'ur') {
+            document.body.style.direction = "rtl";
+            document.body.style.textAlign = "right";
+        } else {
+            document.body.style.direction = "ltr";
+            document.body.style.textAlign = "left";
+        }
+
+        // Poori website ke text contents ko loop chala kar translate karna
+        document.querySelectorAll("[data-i18n]").forEach(element => {
+            const key = element.getAttribute("data-i18n");
+            if (globalTranslations[lang] && globalTranslations[lang][key]) {
+                element.innerHTML = globalTranslations[lang][key];
+            }
+        });
+    }
+
+    // 5. LANGUAGE RESET TRIGGER: Navbar ke button ke liye
+    function resetLanguage() {
+        localStorage.removeItem('user-language'); // Memory clear
+        location.reload(); // Page reload hote hi dobara modal khul jayega
+    }
     </script>
 </body>
 </html>
