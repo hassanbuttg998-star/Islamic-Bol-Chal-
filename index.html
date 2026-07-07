@@ -800,32 +800,8 @@
         </div>
     </footer>
 
-    <!-- INTERACTIVE JAVASCRIPT SYSTEM ENGINE -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const modal = document.getElementById("languageModal");
-            const savedLang = localStorage.getItem("userLanguage");
-            
-            if (!savedLang) {
-                setTimeout(() => {
-                    modal.classList.add("show");
-                }, 400); 
-            }
-        });
-
-        function selectLanguage(lang) {
-            localStorage.setItem("userLanguage", lang);
-            const modal = document.getElementById("languageModal");
-            modal.classList.remove("show");
-            console.log("Language Node Saved: " + lang);
-        }
-
-        function resetLanguage() {
-            const modal = document.getElementById("languageModal");
-            modal.classList.add("show");
-        }
-
-        <script>
+    <!-- GLOBAL MULTI-LANGUAGE ENGINE WITH LOCALSTORAGE -->
+<script>
     // 1. POORI WEBSITE KA TRANSLATION DATA
     const globalTranslations = {
         "en": {
@@ -848,12 +824,12 @@
             "nav_prophets": "انبیاء",
             "hero_welcome": "خوش آمدید",
             "hero_title": "اسلامک بول چال",
-            "hero_desc": "کہانیوں، علم اور غور و فکر کے ذریعے اسلام کو دریافت کریں۔"
+            "hero_desc": "کہانیوں، علم اور غور و فکر کے ذریعے islam کو دریافت کریں۔"
         }
     };
 
     // 2. AUTO INITIALIZER: Jab bhi page load hoga, check karega memory
-    window.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
         const savedLanguage = localStorage.getItem('user-language');
         const modal = document.getElementById('screen-language');
 
@@ -911,6 +887,6 @@
         localStorage.removeItem('user-language'); // Memory clear
         location.reload(); // Page reload hote hi dobara modal khul jayega
     }
-    </script>
+</script>
 </body>
 </html>
