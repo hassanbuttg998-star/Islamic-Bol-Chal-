@@ -800,9 +800,8 @@
         </div>
     </footer>
 
-    <!-- GLOBAL MULTI-LANGUAGE ENGINE WITH LOCALSTORAGE -->
-<script>
-    // 1. POORI WEBSITE KA TRANSLATION DATA
+  <script>
+    // 1. TRANSLATION DICTIONARY
     const globalTranslations = {
         "en": {
             "lang_title": "Choose Your Language",
@@ -828,48 +827,57 @@
         }
     };
 
-    // 2. AUTO INITIALIZER: Jab bhi page load hoga, check karega memory
+    // 2. AUTO RUN FUNCTION: Page load hote hi check karega
     document.addEventListener('DOMContentLoaded', () => {
         const savedLanguage = localStorage.getItem('user-language');
-        const modal = document.getElementById('screen-language');
+        // Dono IDs check karega taake koi crash na ho
+        const modal = document.getElementById('screen-language') || document.getElementById('languageModal');
 
         if (savedLanguage) {
-            // Agar language pehle se saved hai, toh direct translate karo aur modal chupa do
+            // Agar language saved hai, toh popup chupa do aur setting apply karo
             applyLanguageSettings(savedLanguage);
-            if (modal) modal.style.display = 'none';
+            if (modal) {
+                modal.style.display = 'none';
+                modal.classList.remove('show');
+            }
         } else {
-            // Naya user hai toh modal samne dikhao
-            if (modal) modal.style.display = 'flex';
-            applyLanguageSettings('en'); // Default initial display
+            // Naya user hai toh popup lazmi samne lao
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.classList.add('show');
+            }
+            applyLanguageSettings('en'); // Default initial load
         }
     });
 
-    // 3. SELECTION CONTROLLER: Jab user Urdu ya English button dabaye
+    // 3. SELECTION HANDLERS: Buttons click hone par
     function setGlobalLanguage(lang) {
-        localStorage.setItem('user-language', lang); // Browser database me save kar diya
+        localStorage.setItem('user-language', lang);
         applyLanguageSettings(lang);
 
-        // Ek smooth close transition
+        const modal = document.getElementById('screen-language') || document.getElementById('languageModal');
         setTimeout(() => {
-            const modal = document.getElementById('screen-language');
-            if (modal) modal.style.display = 'none';
-        }, 500);
+            if (modal) {
+                modal.style.display = 'none';
+                modal.classList.remove('show');
+            }
+        }, 400);
     }
 
-    // Isko backup ke liye rakh rahe hain agar kahin purana naam use ho raha ho
+    // Agar HTML me purana function name call ho raha ho toh crash na ho
     function selectLanguage(lang) {
         setGlobalLanguage(lang);
     }
 
-    // 4. MAIN INTERFACE TRANSFORMATION ENGINE
+    // 4. TRANSFORMATION ENGINE: Jo text aur direction badalta hai
     function applyLanguageSettings(lang) {
-        // Modal ka text update karna
         const mainTitle = document.getElementById('lang-main-title');
         const footerText = document.getElementById('lang-footer-text');
+        
         if (mainTitle) mainTitle.innerText = globalTranslations[lang]["lang_title"];
         if (footerText) footerText.innerHTML = `<i class="fa-solid fa-lock" style="font-size:0.65rem;"></i> ${globalTranslations[lang]["lang_footer"]}`;
 
-        // Language Direction Setup (RTL for Urdu)
+        // Urdu ke liye Right-to-Left (RTL) alignment
         if (lang === 'ur') {
             document.body.style.direction = "rtl";
             document.body.style.textAlign = "right";
@@ -878,7 +886,7 @@
             document.body.style.textAlign = "left";
         }
 
-        // Poori website ke text contents ko loop chala kar translate karna
+        // Loop through all data-i18n elements
         document.querySelectorAll("[data-i18n]").forEach(element => {
             const key = element.getAttribute("data-i18n");
             if (globalTranslations[lang] && globalTranslations[lang][key]) {
@@ -887,12 +895,11 @@
         });
     }
 
-    // 5. LANGUAGE RESET TRIGGER: Navbar ke button ke liye
+    // 5. NAVBAR RESET BUTTON FUNCTION
     function resetLanguage() {
-        localStorage.removeItem('user-language'); // Memory clear
-        location.reload(); // Page reload hote hi dobara modal khul jayega
+        localStorage.removeItem('user-language');
+        location.reload();
     }
-</script>
 </script>
 </body>
 </html>
