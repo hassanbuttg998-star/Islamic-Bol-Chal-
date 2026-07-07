@@ -496,25 +496,32 @@
 </head>
 <body>
 
-    <!-- INTERACTIVE LANGUAGE SELECTION MODAL -->
-    <div class="lang-overlay" id="languageModal">
-        <div class="hero-right-card">
-            <i class="fa-solid fa-earth-americas" style="font-size: 2.2rem; color: var(--primary-gold); margin-bottom: 15px; display:inline-block;"></i>
-            <h3>Choose Your Language</h3>
-            <p>Apni Zubaan Chunein</p>
-            
-            <div class="lang-option" onclick="selectLanguage('ur')">
-                <img src="https://flagcdn.com/w40/pk.png" alt="Urdu">
-                <span>اردو (Urdu)</span>
-            </div>
-            
-            <div class="lang-option" onclick="selectLanguage('en')">
-                <img src="https://flagcdn.com/w40/us.png" alt="English">
-                <span>English</span>
-            </div>
-            
-            <span class="card-note"><i class="fa-solid fa-lock" style="font-size:0.65rem;"></i> Your choices are secure & saved</span>
+   <!-- INTERACTIVE LANGUAGE SELECTION MODAL -->
+<div class="lang-overlay" id="screen-language" style="display: none;">
+    <div class="hero-right-card">
+        <i class="fa-solid fa-earth-americas" style="font-size: 2.2rem; color: var(--primary-gold); margin-bottom: 15px; display:inline-block;"></i>
+        
+        <!-- JavaScript se control hone wali main heading -->
+        <h3 id="lang-main-title">Choose Your Language</h3>
+
+        <!-- Urdu Button (Function ka naam setGlobalLanguage rakh diya hai) -->
+        <div class="lang-option" onclick="setGlobalLanguage('ur')">
+            <img src="https://flagcdn.com/w40/pk.png" width="20" alt="Urdu">
+            <span>اردو (Urdu)</span>
         </div>
+
+        <!-- English Button -->
+        <div class="lang-option" onclick="setGlobalLanguage('en')">
+            <img src="https://flagcdn.com/w40/us.png" width="20" alt="English">
+            <span>English</span>
+        </div>
+
+        <!-- Footer Note jo auto translate hoga -->
+        <span class="card-note" id="lang-footer-text">
+            <i class="fa-solid fa-lock" style="font-size:0.65rem;"></i> Your choices are secure & saved
+        </span>
+    </div>
+</div>
     </div>
 
     <!-- MAIN APP NAVIGATION BAR -->
